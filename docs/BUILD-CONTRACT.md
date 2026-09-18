@@ -4,7 +4,7 @@ This is an engineering scope and acceptance contract, not a signed commercial/le
 
 ## Confirmed constraints and reference status
 
-The owner requests online commerce with PayPal and customer accounts, story/products/Cookie of the Month/reviews, dynamic categories/subcategories/collections and strict project isolation. The supplied conversation includes a logo and Instagram screenshot attachment, but no inspected, versioned approved page designs. Prior assistant copy, page lists, guest-checkout recommendations and sample products/prices are proposals only. Preserve them as context, not production content. No approved visual specification has been recovered.
+The owner requests online commerce with PayPal and both guest and customer-account purchasing, story/products/Cookie of the Month/reviews, dynamic categories/subcategories/collections and strict project isolation. Brant has now supplied `CC Wesite Mockup.png` as the homepage production rendition, with the final logo pending. See [Homepage Production Reference](HOMEPAGE-SPEC.md) for the approved composition, reconciliation with real catalog/pricing, and remaining design deliverables. Accompanying pasted specifications are reference material; their examples do not override direct owner decisions. Exact tokens, responsive layouts and non-homepage specifications still require approval.
 
 ## Exact next work, in order
 

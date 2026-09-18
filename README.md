@@ -13,6 +13,7 @@ Dedicated Supabase project: `vqebxtybuiegvfxawksf`.
 - [Architecture and dynamic commerce model](docs/ARCHITECTURE.md)
 - [Website Build Contract and specification gate](docs/BUILD-CONTRACT.md)
 - [Working product specification and confirmed menu](docs/PRODUCT-SPEC.md)
+- [Homepage production reference and content reconciliation](docs/HOMEPAGE-SPEC.md)
 
 Run `npm run check` to check foundation invariants. No package installation or credentials are needed. Copy `.env.example` to ignored `.env.local` only when configuring this project. Do not paste secrets into chat or commit them.
 
