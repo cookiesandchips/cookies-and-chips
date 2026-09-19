@@ -2,6 +2,8 @@
 
 ## Brand and visual references
 
+- [Clickable visual review 01 and review decisions](visual-review/README.md)
+
 - [Website and social logo package](brand/logo-package/README.md)
 
 - [First-pass visual decisions for review](VISUAL-RULES-FIRST-PASS.md)

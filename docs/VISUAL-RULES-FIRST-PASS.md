@@ -1,6 +1,6 @@
 # Visual rules — first pass for review
 
-September 19, 2026. Concrete recommendations derived from the supplied guide and latest rendition. These resolve choices for review; they are not represented as already approved or implemented. Logo package is still in progress.
+September 19, 2026. Concrete recommendations derived from the supplied guide and latest rendition. These resolve choices for review; they are not represented as already approved or implemented. Logo package V1 is available; generated derivatives remain subject to visual review.
 
 ## Recommended decisions
 
@@ -41,3 +41,7 @@ Visual drafting can proceed with labelled missing assets while these operational
 ## Latest owner direction
 
 [Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.
+
+## Review artifact
+
+The owner authorized the first visual review. See [review 01](visual-review/README.md) for the static prototype, decisions and known limitations. This does not approve production implementation.
