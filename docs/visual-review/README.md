@@ -34,3 +34,7 @@ Browser inspected at desktop and 390px mobile width. Verified product → add-to
 ## Generated imagery update
 
 Owner requested temporary generated photography. Seven built-in image-generation assets now fill the hero, four core product cards, seasonal feature, story, product detail, gallery and closing banner. See ../brand/generated-v1/README.md for prompts and provenance. This supersedes the image-placeholder description above; original product and founder photography can replace these independently.
+
+## Shopping and checkout refinement
+
+Owner approves the visual direction. Added full-menu Shop filtering/search/sort, individual product details and multi-product bag; this supersedes the earlier representative-product limitation. Continue Shopping retains filters and bag. Checkout now has Guest/Login tabs and a checked, optional post-order account-setup choice. Authentication and account creation remain explanatory stubs; no real account is created. Browser verification covered oatmeal search, correct product detail and matching bag entry.

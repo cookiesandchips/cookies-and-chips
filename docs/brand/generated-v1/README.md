@@ -29,4 +29,3 @@ Create photorealistic premium artisan bakery photography for Cookies & Chips web
 ## story
 
 Create photorealistic premium artisan bakery photography for Cookies & Chips website. Warm cream, caramel and chocolate brown palette, natural window light, tactile authentic baked texture, editorial food photography, no text, no logos, no watermarks. Portrait 4:5 photograph anonymous adult baker's hands arranging chocolate chip cookie dough on parchment on a baking tray. Crop excludes head and face entirely, brown linen apron torso, cozy softly blurred home bakery. Correct natural hand anatomy, authentic calm candid moment.
-

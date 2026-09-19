@@ -84,3 +84,11 @@ Use editable categories for Cookies and For the Pups. Seasonal can be a collecti
 ## Latest owner direction
 
 [Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.
+
+## Visual review feedback — accepted September 19
+
+Owner endorses the current visual direction. Add Continue Shopping beside Checkout in the bag; return to the Shop with filters retained and bag intact. Shop includes full catalog, search, category, collection and flavor filters, sorting, result count, clear filters and no-results state. Production taxonomy includes dynamic subcategories and must be administrator-editable; preview fixtures do not establish schema enums. Filters combine with AND; search matches product name/description.
+
+Checkout explicitly offers Guest | Login tabs, Guest selected initially. Guest option “Create an account after my order” is checked initially at the owner's request, clearly explained and easy to uncheck. No password required before guest payment. After successful order, offer a secure email-verification/setup link; account creation failure must not fail the order. Existing-account emails must never create duplicates or expose/link previous orders without verified ownership. Marketing consent is separate and is not granted by this checkbox. Login uses the same cart and commerce pipeline; switching tabs preserves entered data and cart, and hidden fields must not block validation. Production needs secure authentication and abuse protections, not the preview stub.
+
+Acceptance: Continue Shopping retains bag and filter selections; choosing another product adds that specific product. Guest opt-out places an order without creating an account. Checked opt-in starts verification after order success. Verify keyboard tab navigation, errors, existing email handling and mobile behavior.
