@@ -1,6 +1,6 @@
 # Environment and secrets contract
 
-Status: names established; values and deployment scopes not configured.
+Status: names established; Resend selected; values and deployment scopes not configured. Supabase Auth SMTP configuration is separate from the application email API configuration.
 
 | Variable | Exposure | Purpose / required when |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ Status: names established; values and deployment scopes not configured.
 | PAYPAL_WEBHOOK_ID | Server configuration | Registered endpoint's ID, matched to app and sandbox/live mode |
 | PAYPAL_ENVIRONMENT | Server configuration | sandbox for development/preview; live requires production activation |
 | EMAIL_FROM | Server configuration | Verified sender; needed when email is implemented |
-| EMAIL_PROVIDER_API_KEY | Server secret | Dedicated provider credential after provider selection |
+| EMAIL_PROVIDER_API_KEY | Server secret | Dedicated Resend sending API key (existing variable name retained) |
 
 Use modern Supabase publishable/secret keys. The earlier conversation's SUPABASE_SERVICE_ROLE_KEY is a legacy alternative, not an additional required credential. Do not provision both by default. If the project requires legacy keys, document that explicit exception before changing this contract.
 

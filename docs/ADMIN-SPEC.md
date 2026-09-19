@@ -30,7 +30,7 @@ Proposed workflow for approval:
 4. Preview product, package size, base price, markup mode/value, current selling price and new selling price. Preview makes no changes.
 5. Save the reviewed set. Saving a base or markup change recomputes the selling price from that base and selected mode. Unselected products remain unchanged; retries do not compound markup. Proposed V1 has no independent manual override of the computed final price.
 
-Use decimal arithmetic; round the computed selling price once to the currency's minor unit. Proposed rounding: half-up. Fixed markup uses the same currency as the product. No automatic .99 endings or markup on taxes/shipping. Currency still needs confirmation. Existing $30/dozen and $8/10 prices are prior retail prices, not newly inferred base prices; obtain base/markup inputs before transitioning them to calculated pricing.
+Use decimal arithmetic; round the computed selling price once to the currency's minor unit. Proposed rounding: half-up. Fixed markup uses the same currency as the product. No automatic .99 endings or markup on taxes/shipping. Currency still needs confirmation. Existing $30/dozen and $8/10 prices are prior retail prices, not newly inferred base prices; human-cookie base is now confirmed at $20/dozen, with starting markup still to be selected. Dog-treat base/markup remain pending.
 
 ## Integrity and permissions
 

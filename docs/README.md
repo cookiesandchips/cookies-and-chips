@@ -2,6 +2,8 @@
 
 ## Brand and visual references
 
+- [First-pass visual decisions for review](VISUAL-RULES-FIRST-PASS.md)
+
 - [Brand guide, logo and latest homepage mockup](brand/README.md)
 - [Homepage layout and content specification](HOMEPAGE-SPEC.md)
 - [Light enterprise management portal and pricing](ADMIN-SPEC.md)

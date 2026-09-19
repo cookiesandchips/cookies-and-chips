@@ -24,7 +24,11 @@ Names and descriptions below preserve owner-provided copy, with encoded trailing
 
 The supplied descriptions are marketing copy, not complete ingredient, allergen, nutrition or pet-feeding disclosures. Do not infer unprovided safety or dietary claims.
 
-## Confirmed price list
+## Confirmed base pricing — September 19
+
+Human-cookie starting base price is **$20 per dozen**. This is the private admin pricing basis, not the online selling price. Final selling price uses the confirmed percentage-or-fixed-amount markup rule. The starting markup has not yet been supplied. Maintaining the previously supplied $30 retail price would require either 50% or $10 markup; neither is selected automatically. Dog-treat base price/markup remain unspecified; the previously supplied $8/10 is retail, not an inferred base.
+
+## Previously supplied retail price list
 
 | Product family | Package | Price supplied |
 | --- | --- | --- |
