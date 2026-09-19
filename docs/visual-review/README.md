@@ -38,3 +38,7 @@ Owner requested temporary generated photography. Seven built-in image-generation
 ## Shopping and checkout refinement
 
 Owner approves the visual direction. Added full-menu Shop filtering/search/sort, individual product details and multi-product bag; this supersedes the earlier representative-product limitation. Continue Shopping retains filters and bag. Checkout now has Guest/Login tabs and a checked, optional post-order account-setup choice. Authentication and account creation remain explanatory stubs; no real account is created. Browser verification covered oatmeal search, correct product detail and matching bag entry.
+
+## Multi-platform social editor
+
+Admin → Social profiles now supports 14 platforms with add/remove, handle/link, visibility, order and live icon preview. Saving updates Follow Along and storefront footer icons within the review session. Hidden profiles do not render. This supersedes the earlier single-record limitation. Icon source: Font Awesome Free 6.x brands, https://github.com/FortAwesome/Font-Awesome; SVG icons and license are vendored in social-icons/. No dependency on another project is introduced.

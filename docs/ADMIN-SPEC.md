@@ -80,3 +80,11 @@ This section specifies future implementation; the admin portal is not yet built.
 ## Latest owner direction
 
 [Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.
+
+## Social icon mapping — owner refinement
+
+Support Instagram, Facebook, TikTok, YouTube, Pinterest, X, Threads, LinkedIn, Snapchat, Bluesky, WhatsApp, Telegram, Reddit and Discord. Each platform has its recognizable brand icon, selected automatically from the platform ID; administrators do not upload or choose an icon manually. One profile per platform in V1, with editable handle, HTTPS profile URL, visibility and display order. Add/remove controls and an icon preview are included.
+
+Only saved, visible profiles with valid URLs render in Follow Along and storefront footer social links. Hidden profiles preserve their settings but contribute no icon or empty space. Sort by configured display order, preserving list order on ties. Links have platform/handle accessible names, 44px targets and safe new-tab behavior. Reject mismatched platform domains and embedded credentials. Generic links, if added later, use a generic link symbol, never another platform's logo.
+
+The local review uses vendored Font Awesome Free brand SVGs with its license in visual-review/social-icons/LICENSE.txt. Test icon appearance, hide/show, reorder, invalid links and independent profile edits before production. Current changes are session-only preview behavior; production settings require persistence, admin authorization and publishing/cache updates described above.
