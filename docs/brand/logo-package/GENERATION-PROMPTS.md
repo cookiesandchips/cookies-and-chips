@@ -13,4 +13,3 @@ Use case: precise-object-edit. Input reference is Cookies & Chips primary circul
 ## Variant 3
 
 Use case: logo-brand. Create a social sharing banner from the reference Cookies & Chips circular logo. Landscape 1.91:1. Warm paper background #FFF9F0. Supplied circular logo preserved as faithfully as possible on left, occupying 60 percent of height, balanced dark-chocolate editorial text right, exact text 'Cookies make life better.' and small script 'Baked with Love'. Restrained coral heart accent. Keep all content in central safe area with wide margins. No social handles, URLs, product prices, new characters, photography or mockup. Crisp standalone graphic.
- 
