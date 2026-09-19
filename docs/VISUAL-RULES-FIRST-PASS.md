@@ -31,7 +31,7 @@ Review three representative page designs together: Home at desktop/mobile widths
 ## Remaining inputs
 
 - Starting markup on $20/dozen; dog-treat base/markup.
-- Final logo derivatives and original hero/product/founder/gallery assets; actual story/reviews and selected featured products.
+- Review the supplied V1 logo derivatives; provide original hero/product/founder/gallery assets; actual story/reviews and selected featured products.
 - Delivery origin, radius method, under-$50 delivery behavior, pickup location/hours, preparation/cutoffs and inventory policy.
 - Tax calculation provider/business configuration; shipping mechanism, parcel sizes/weights and eligible destinations.
 - Vercel project identity/repo connection; Supabase environment designation/access; Resend verified sender/Auth SMTP; PayPal sandbox secret/buyer/webhook when endpoint exists.

@@ -2,6 +2,8 @@
 
 ## Brand and visual references
 
+- [Website and social logo package](brand/logo-package/README.md)
+
 - [First-pass visual decisions for review](VISUAL-RULES-FIRST-PASS.md)
 
 - [Brand guide, logo and latest homepage mockup](brand/README.md)

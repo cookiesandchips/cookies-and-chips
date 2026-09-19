@@ -56,3 +56,23 @@ Revalidate fulfillment at checkout finalization. If shipping is disabled or the 
 - Customers cannot access private pricing inputs or invoke admin mutations; historical order totals remain unchanged.
 - Shipping OFF removes it from both guest and authenticated checkout; ON calculates destination-specific charges before payment. Both flows use the same commerce pipeline.
 - Light theme, filters, selection counts, expandable groups and detail drawer behave consistently with approved responsive/admin page specifications.
+
+## Social profiles and links — confirmed owner requirement
+
+Provide Settings → Social profiles so an authorized administrator can add, edit, hide, remove and reorder social profiles without a code change or deployment. Keep this Cookies & Chips configuration isolated from every other project.
+
+Each record stores a stable ID, platform, optional display label, editable handle, full profile URL, visible flag and display order. Support Instagram, Facebook, TikTok, Pinterest, YouTube and a generic website/link option; the actual enabled platforms and handles are owner-entered. Do not infer a URL solely from a handle: retain the explicit full URL and show a preview so the administrator can check that both match.
+
+Use the saved settings consistently in the header where present, Follow Along section, footer and other public profile links. Hidden/incomplete profiles must not render empty icons or broken links. A social gallery's image/content management is separate; editing a handle does not connect a live social feed.
+
+Save only validated HTTPS URLs with a hostname; reject script/data schemes, embedded credentials and invalid destinations. Recognized platform choices should warn on a mismatched hostname. Handle text is plain text, never executable markup. Require server-side admin authorization, audit actor/time and before/after values, preserve unsaved edits on validation errors, and invalidate published settings caches after save. Do not store platform passwords or access tokens in public profile settings.
+
+Acceptance criteria:
+- Editing a handle and URL updates every public occurrence after successful save without redeployment.
+- Visibility and ordering persist and match the storefront; removing one profile does not alter another.
+- Invalid links cannot be published; failures keep the last valid public configuration.
+- Customers and unauthorized accounts cannot mutate settings.
+- Icons have accessible platform labels; new-tab links use appropriate security attributes.
+- Empty settings show no invented profiles; an admin preview shows the exact destination before save.
+
+This section specifies future implementation; the admin portal is not yet built.

@@ -3,6 +3,8 @@
 Updated September 19, 2026. These supplied originals are stored unchanged, with web-friendly filenames for the PNGs.
 
 - [Brand & UI System V1 (PDF)](Cookies_and_Chips_Brand_UI_System_V1.pdf)
+- [Website and social logo package V1](logo-package/README.md)
+- [Download logo package ZIP](cookies-and-chips-logo-package-v1.zip)
 - [Current circular logo (PNG)](cookies-and-chips-logo.png)
 - [Updated homepage production rendition (PNG)](homepage-production-reference-2026-09-19.png)
 - [All project documents](../README.md)
@@ -48,4 +50,4 @@ Typography: DM Serif Display 400 for display/headings; Inter 400/500/600/700 for
 
 Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96px. Guide ranges still to resolve: 1200–1280px content width, 8–12px card radius, 5–8px button/input radius, and product-card 4:5 versus 1:1 crops. The rendition's rounded CTA treatment needs an explicit role/preset mapping against the guide. State colors and accessible foreground/background pairings must be defined rather than invented from descriptive names.
 
-Logo usage: preserve proportions/artwork, at least 12% diameter clear space, minimum 72px for the full circular mark per guide. Header adaptation, favicon and simplified derivatives remain to be specified; do not reconstruct artwork in code.
+Logo usage: preserve proportions/artwork, at least 12% diameter clear space, minimum 72px for the full circular mark per guide. Supporting horizontal, favicon and social derivatives are now supplied in the V1 logo package for review. Do not reconstruct the original artwork in code.
