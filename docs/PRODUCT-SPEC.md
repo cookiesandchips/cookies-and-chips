@@ -28,12 +28,10 @@ The supplied descriptions are marketing copy, not complete ingredient, allergen,
 
 | Product family | Package | Price supplied |
 | --- | --- | --- |
-| Cookies | Individual | $3 |
-| Cookies | ½ dozen (6) | $15 |
 | Cookies | 1 dozen (12) | $30 |
 | Sandie’s Treats | 10 dog treats | $8 |
 
-The dollar denomination is supplied; currency code and tax treatment remain to be confirmed. Confirm that the general cookie pricing also applies to Pumpkin Patch and every flavor. Model package prices explicitly: six individually priced cookies total $18, whereas a half-dozen package costs $15. Do not silently introduce automatic quantity discounts, mixed boxes, or arbitrary quantity repricing. Dog-treat pack pricing is separate from human-cookie pricing.
+The owner has removed individual and half-dozen pricing. Human cookies are offered by the dozen at $30; do not offer single-cookie or half-dozen purchase options. Quantity refers to the number of dozen packages, not individual cookies. The dollar denomination is supplied; currency code and tax treatment remain to be confirmed. Confirm that the general cookie pricing also applies to Pumpkin Patch and every flavor. Do not silently introduce automatic quantity discounts, mixed boxes, or arbitrary quantity repricing. Dog-treat pack pricing remains separate and unchanged at $8 for 10 treats.
 
 ## Confirmed fulfillment offer
 
@@ -54,14 +52,14 @@ Use editable categories for Cookies and For the Pups. Seasonal can be a collecti
 
 - Guests complete an eligible purchase without registering for a Cookies & Chips account; signed-in customers can also purchase.
 - Account and guest order access remain isolated; another shopper cannot obtain order details using a guessed identifier.
-- Explicit packages display and calculate $3/individual, $15/6 and $30/12; Sandie’s Treats displays $8/10. Final currency and seasonal applicability are confirmed before payment implementation.
+- Cookie packages display and calculate $30 per dozen, with no individual or half-dozen purchase options; Sandie’s Treats displays $8 per 10 treats. Final currency and seasonal applicability are confirmed before payment implementation.
 - Eligible orders inside the confirmed 10-mile boundary receive free local delivery; eligible $50+ orders inside the confirmed 50-mile boundary do too.
 - Test the exact approved distance and spend boundaries and values immediately on either side; unsupported or undefined cases cannot receive invented rates.
 - Shipping uses the approved ZIP/rate rules and displays an exact total before payment, not a $10–$20 estimate charged arbitrarily.
 
 ## Next decisions
 
-1. Package composition: one flavor per package, mix-and-match, or both? Does selecting six singles trigger package pricing, or must customers choose a package?
+1. Dozen composition: one flavor per dozen, mix-and-match, or both?
 2. Delivery origin and distance method; rules for orders under $50 between 10 and 50 miles; threshold basis; service beyond 50 miles.
 3. Shipping ZIP/rate schedule and geography; pickup details; preparation times and order cutoffs.
 4. Currency/taxes, seasonal dates and price applicability, inventory model, ingredients/allergens and pet-treat details.

@@ -29,7 +29,7 @@ The image's display dimensions do not define CSS breakpoints or production font 
 | Rendition / pasted example | Production treatment |
 | --- | --- |
 | Chocolate Chip, Sea Salt Chocolate Chip, Monster Chip and White Chocolate Macadamia cards | Use approved catalog names and actual products. Ali’s Classic and Macadamia Dream are confirmed names; Sea Salt and Monster Chip are not confirmed launch products. Heather selects the four best sellers. |
-| $24 cards and $26 monthly feature | These are visual placeholders. Use confirmed $3 individual / $15 half dozen / $30 dozen cookie packages; identify the selected package beside its price. Seasonal price applicability still needs confirmation. |
+| $24 cards and $26 monthly feature | These are visual placeholders. Use $30 per dozen for cookies and show the package size beside the price. Individual and half-dozen purchase options have been removed. Sandie’s Treats remains $8 for 10 treats. Seasonal price applicability still needs confirmation. |
 | Pumpkin Chocolate Chip as monthly feature | Pumpkin Patch is the confirmed seasonal product name. Current Cookie of the Month designation is still to be selected; do not infer it from the reference. |
 | Add to Cart on every card | Direct add requires a clearly defined purchasable package/default. Required flavor/package choices must be selected first. Preserve CTA styling while specifying the appropriate interaction. |
 | Local delivery “if enabled later” in pasted notes | Local delivery is already part of the owner-supplied offer; remaining rate/eligibility details are unresolved, not silently deferred. |
