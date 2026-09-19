@@ -5,7 +5,7 @@ Status: working specification. The facts below were supplied by Brant in this ta
 ## Confirmed checkout requirements
 
 - CHECKOUT-01: Both guests and registered customers can purchase through PayPal. Creating a Cookies & Chips account is not required to purchase. This does not promise any particular PayPal wallet/card eligibility.
-- CHECKOUT-02: Account holders can use an authenticated purchase flow. Exact account features and guest-to-account order linking remain to be specified.
+- CHECKOUT-02: Guest and authenticated purchases share one commerce pipeline. Account scope includes profile, saved addresses, order history/detail and reorder alongside sign-in, registration and recovery. Guest-to-account order linking remains to be specified. See ADDENDUM-2026-09-19.md.
 - SECURITY-01: Guest order access must use a secure verification mechanism; knowing an email address or order number alone must not expose an order. Never automatically attach a guest order to an account on an unverified email match.
 
 ## Confirmed catalog and copy
@@ -59,7 +59,7 @@ Use editable categories for Cookies and For the Pups. Seasonal can be a collecti
 
 ## Next decisions
 
-1. Dozen composition: one flavor per dozen, mix-and-match, or both?
+1. Dozen composition defaults to one selected flavor per dozen per the September 19 addendum. Mixed dozens require a separate specification. Admin markup basis and final pricing behavior remain to be resolved in ADMIN-SPEC.md.
 2. Delivery origin and distance method; rules for orders under $50 between 10 and 50 miles; threshold basis; service beyond 50 miles.
 3. Shipping ZIP/rate schedule and geography; pickup details; preparation times and order cutoffs.
 4. Currency/taxes, seasonal dates and price applicability, inventory model, ingredients/allergens and pet-treat details.
