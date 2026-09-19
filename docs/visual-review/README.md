@@ -30,3 +30,7 @@ The prototype is intentionally outside application source. Sample lists are fixt
 ## Verification
 
 Browser inspected at desktop and 390px mobile width. Verified product → add-to-bag → checkout with a dozen/$20 subtotal. Verified selected-product 50% markup preview and apply changed only that product from $20 to $30. JavaScript syntax and repository foundation checks pass. This is not a complete accessibility, checkout or responsive acceptance test.
+
+## Generated imagery update
+
+Owner requested temporary generated photography. Seven built-in image-generation assets now fill the hero, four core product cards, seasonal feature, story, product detail, gallery and closing banner. See ../brand/generated-v1/README.md for prompts and provenance. This supersedes the image-placeholder description above; original product and founder photography can replace these independently.
