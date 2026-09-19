@@ -33,6 +33,17 @@ The supplied descriptions are marketing copy, not complete ingredient, allergen,
 
 The owner has removed individual and half-dozen pricing. Human cookies are offered by the dozen at $30; do not offer single-cookie or half-dozen purchase options. Quantity refers to the number of dozen packages, not individual cookies. The dollar denomination is supplied; currency code and tax treatment remain to be confirmed. Confirm that the general cookie pricing also applies to Pumpkin Patch and every flavor. Do not silently introduce automatic quantity discounts, mixed boxes, or arbitrary quantity repricing. Dog-treat pack pricing remains separate and unchanged at $8 for 10 treats.
 
+## Checkout tax and shipping — confirmed requirement
+
+Calculate and apply appropriate sales tax and shipping for the actual checkout destination before payment. Both guest and authenticated customers use the same server-side calculation pipeline. Saved addresses may prefill the flow, but changing the selected address must recalculate the quote.
+
+- Display merchandise subtotal using published selling prices, shipping/local fulfillment charges, applicable sales tax and final payable total as separate lines.
+- Tax calculation must use the configured business collection obligations, product tax classification, fulfillment method and applicable address rules; do not implement a universal ZIP-to-percentage table or assume every destination owes tax. Tax on shipping, if applicable, belongs in the tax calculation.
+- Select/document tax and shipping calculation services or maintained mechanisms before implementation. Merchant tax configuration, origin address, product tax categories, parcel weights/dimensions and supported destinations remain required inputs. No tax rates or obligations are determined by this specification.
+- Recalculate when destination, quantities, prices or fulfillment selection changes. Do not fall back to zero tax/free shipping if calculation fails; block payment pending a valid quote and show a recoverable error.
+- Bind the reviewed quote to the current cart, destination, fulfillment method and currency. Validate quote freshness server-side before creating/capturing payment; changed totals require customer review. Preserve calculation references, breakdowns and purchase-time totals on the order.
+- Pickup and local delivery need their appropriate fulfillment location/tax treatment; shipping OFF must not disable applicable tax calculation.
+
 ## Confirmed fulfillment offer
 
 | Method | Supplied rule | Remaining definition |
@@ -55,11 +66,12 @@ Use editable categories for Cookies and For the Pups. Seasonal can be a collecti
 - Cookie packages display and calculate $30 per dozen, with no individual or half-dozen purchase options; Sandie’s Treats displays $8 per 10 treats. Final currency and seasonal applicability are confirmed before payment implementation.
 - Eligible orders inside the confirmed 10-mile boundary receive free local delivery; eligible $50+ orders inside the confirmed 50-mile boundary do too.
 - Test the exact approved distance and spend boundaries and values immediately on either side; unsupported or undefined cases cannot receive invented rates.
+- Tax/shipping recalculation covers address changes, mixed human-food/pet-treat carts, shipping taxability, calculation failure, stale quotes and both checkout identities. Verify provider totals against persisted order and payment totals.
 - Shipping uses the approved ZIP/rate rules and displays an exact total before payment, not a $10–$20 estimate charged arbitrarily.
 
 ## Next decisions
 
-1. Dozen composition defaults to one selected flavor per dozen per the September 19 addendum. Mixed dozens require a separate specification. Admin markup basis and final pricing behavior remain to be resolved in ADMIN-SPEC.md.
+1. Dozen composition defaults to one selected flavor per dozen per the September 19 addendum. Mixed dozens require a separate specification. Admin pricing uses an entered base price plus either percentage or fixed-amount markup; see ADMIN-SPEC.md.
 2. Delivery origin and distance method; rules for orders under $50 between 10 and 50 miles; threshold basis; service beyond 50 miles.
 3. Shipping ZIP/rate schedule and geography; pickup details; preparation times and order cutoffs.
 4. Currency/taxes, seasonal dates and price applicability, inventory model, ingredients/allergens and pet-treat details.
