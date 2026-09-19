@@ -30,10 +30,14 @@ Review three representative page designs together: Home at desktop/mobile widths
 
 ## Remaining inputs
 
-- Starting markup on $20/dozen; dog-treat base/markup.
+- Placeholder markup is authorized; see provisional operations. Owner will edit actual prices during implementation.
 - Review the supplied V1 logo derivatives; provide original hero/product/founder/gallery assets; actual story/reviews and selected featured products.
 - Delivery origin, radius method, under-$50 delivery behavior, pickup location/hours, preparation/cutoffs and inventory policy.
 - Tax calculation provider/business configuration; shipping mechanism, parcel sizes/weights and eligible destinations.
 - Vercel project identity/repo connection; Supabase environment designation/access; Resend verified sender/Auth SMTP; PayPal sandbox secret/buyer/webhook when endpoint exists.
 
 Visual drafting can proceed with labelled missing assets while these operational facts are collected. Full checkout implementation and final launch still require the corresponding data/acceptance contracts. No new production UI has been built in this update.
+
+## Latest owner direction
+
+[Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.

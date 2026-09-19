@@ -17,6 +17,8 @@
 - [September 19 business and commerce addendum](ADDENDUM-2026-09-19.md)
 - [Architecture and dynamic commerce model](ARCHITECTURE.md)
 
+- [Provisional pricing, fulfillment and tax recommendation](PROVISIONAL-OPERATIONS.md)
+
 ## Infrastructure
 
 - [Readiness and missing account configuration](INFRASTRUCTURE.md)

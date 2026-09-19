@@ -80,3 +80,7 @@ Use editable categories for Cookies and For the Pups. Seasonal can be a collecti
 3. Shipping ZIP/rate schedule and geography; pickup details; preparation times and order cutoffs.
 4. Currency/taxes, seasonal dates and price applicability, inventory model, ingredients/allergens and pet-treat details.
 5. Approved photography/logo and visual references; page layouts, responsive behavior, full account/admin scope and final acceptance criteria.
+
+## Latest owner direction
+
+[Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.

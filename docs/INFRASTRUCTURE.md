@@ -4,7 +4,7 @@
 
 Owner reports accounts created for Supabase, Resend, GitHub, Vercel and PayPal. GitHub publication has been verified in this task. Other account configuration and connections remain unverified. Resend is selected for order emails and email confirmation. A USA PayPal sandbox merchant account and client ID have been supplied privately; credential values and login details are deliberately excluded from this public repository. The client secret and registered webhook ID have not been configured or verified.
 
-Account creation does not establish deployment, email delivery or payment readiness. Logo package remains in progress; the supplied circular logo is the current reference asset, not a completed derivative package.
+Account creation does not establish deployment, email delivery or payment readiness. Logo package V1 is available in the brand library; generated derivatives await visual review.
 
 ## Original inspection (September 18)
 
@@ -54,3 +54,7 @@ Official references: https://developer.paypal.com/api/rest/ and https://develope
 ## Resend setup next
 
 Verify a dedicated Cookies & Chips sending domain and sender; configure a project-specific sending key securely. Use EMAIL_PROVIDER_API_KEY for the Resend key under the existing environment contract and EMAIL_FROM for the verified sender. Configure Supabase Auth email delivery separately (for example through Resend SMTP); an application Resend key alone does not configure Supabase confirmation/reset emails. Validate Auth redirects and both transactional and Auth email delivery. Provider setup reference: https://resend.com/docs/dashboard/domains/introduction
+
+## Latest owner update
+
+Vercel project is created and set up according to the owner; environment variables are not yet configured. Dashboard sign-in is required in the current browser before the exact project settings can be verified. Starting markup no longer blocks design; see [provisional operations](PROVISIONAL-OPERATIONS.md).

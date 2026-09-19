@@ -39,7 +39,7 @@ Use decimal arithmetic; round the computed selling price once to the currency's 
 - Record actor, timestamp, selected product IDs, base price, markup mode/value, old/new prices and operation ID. Never log credentials or payment details.
 - Use version checks between preview and save. If any selected price changed or a product became invalid, reject the batch and require a refreshed preview. Proposed V1 behavior is an atomic all-or-nothing update.
 - Existing placed orders retain purchase-time prices. For open carts, revalidate current prices before payment and show changed totals for customer review. Define quote expiry and active-payment behavior in the commerce contract; never silently capture a different amount from the amount reviewed.
-- Initial catalog prices remain $30/dozen and $8/10 dog treats until an authorized admin intentionally changes them. Configurable prices are not permanent constants.
+- Starting markup may use development placeholders; see provisional operations. Owner will set actual selling prices during implementation. Configurable prices are not permanent constants.
 
 ## Shipping management
 
@@ -76,3 +76,7 @@ Acceptance criteria:
 - Empty settings show no invented profiles; an admin preview shows the exact destination before save.
 
 This section specifies future implementation; the admin portal is not yet built.
+
+## Latest owner direction
+
+[Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.

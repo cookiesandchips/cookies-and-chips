@@ -40,3 +40,7 @@ For each route provide: requirement IDs; URL pattern; roles/access; section orde
 | OPS-01 | Redirects, email, webhook verification, backup/restore and rollback are verified | Staging evidence and launch checklist |
 
 Performance budgets, browser/device support, image budgets, SEO requirements, accessibility target and visual comparison tolerances must become numeric/testable approved criteria before gate closure. Current cases are requirements for the upcoming specification, not claims of implemented behavior.
+
+## Latest owner direction
+
+[Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.
