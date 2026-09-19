@@ -14,6 +14,8 @@
 
 ## Product and build specifications
 
+- [Private recipe to product workflow](RECIPE-PRODUCT-WORKFLOW.md)
+
 - [Website Build Contract and remaining approval gates](BUILD-CONTRACT.md)
 - [Product catalog, pricing, checkout, tax and fulfillment](PRODUCT-SPEC.md)
 - [September 19 business and commerce addendum](ADDENDUM-2026-09-19.md)

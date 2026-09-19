@@ -88,3 +88,7 @@ Support Instagram, Facebook, TikTok, YouTube, Pinterest, X, Threads, LinkedIn, S
 Only saved, visible profiles with valid URLs render in Follow Along and storefront footer social links. Hidden profiles preserve their settings but contribute no icon or empty space. Sort by configured display order, preserving list order on ties. Links have platform/handle accessible names, 44px targets and safe new-tab behavior. Reject mismatched platform domains and embedded credentials. Generic links, if added later, use a generic link symbol, never another platform's logo.
 
 The local review uses vendored Font Awesome Free brand SVGs with its license in visual-review/social-icons/LICENSE.txt. Test icon appearance, hide/show, reorder, invalid links and independent profile edits before production. Current changes are session-only preview behavior; production settings require persistence, admin authorization and publishing/cache updates described above.
+
+## Recipe-derived product information
+
+See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requested recipe intake, reviewed nutrition/ingredient/allergen drafts, image and description generation, costing suggestions and strict public/private boundary.

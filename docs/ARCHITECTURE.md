@@ -28,3 +28,7 @@ Server computes totals from the authoritative catalog, checks stock and fulfillm
 Persist idempotency keys for supported PayPal operations. Verify webhook signatures, deduplicate durable events, handle retries/out-of-order messages, reconcile capture timeouts, and prevent duplicate fulfillment. Acknowledge only after durable receipt; recover transient errors safely. Inventory reservation/release and refund authority must be settled in the product specification.
 
 References: [PayPal idempotency](https://developer.paypal.com/reference/guidelines/idempotency/), [PayPal webhooks](https://developer.paypal.com/api/rest/webhooks/rest/). SDK choice and eligible payment methods must be verified when implementation starts.
+
+## Recipe-derived product information
+
+See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requested recipe intake, reviewed nutrition/ingredient/allergen drafts, image and description generation, costing suggestions and strict public/private boundary.
