@@ -8,6 +8,8 @@ Dedicated Supabase project: `vqebxtybuiegvfxawksf`.
 
 ## Start here
 
+**[Customer document hub — all specifications, brand guide, logo and updated mockup](docs/README.md)**
+
 - [Readiness and provisioning](docs/INFRASTRUCTURE.md)
 - [Environment contract](docs/ENVIRONMENT.md)
 - [Architecture and dynamic commerce model](docs/ARCHITECTURE.md)
