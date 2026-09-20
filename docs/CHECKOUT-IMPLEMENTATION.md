@@ -13,3 +13,7 @@ Shipping rates require a dedicated `SHIPPO_TEST_API_TOKEN` (or `SHIPPO_LIVE_API_
 Account creation is offered after payment through the existing email-confirmed account flow. It does not silently create an account or enroll customers in marketing. Guest purchasing does not require anonymous Supabase users.
 
 Validation: production build, TypeScript, foundation checks, and tests cover browser price tampering, invalid/duplicate quantities, unavailable products, packing limits, address validation and capture order/currency/amount/status mismatches. Live end-to-end sandbox verification still required before readiness can be claimed.
+
+## Deployment verification
+
+Migration applied successfully to the dedicated Supabase project; seven products seeded and sandbox/pickup settings saved. Schema and table service-role access verified. Checkout page and APIs deployed. Runtime testing identified the configured `SUPABASE_SECRET_KEY` as a public key, which correctly fails access to private order tables. Owner must replace that credential in Vercel; no key value was read or committed. Payment, shipping-rate, and email end-to-end checks remain blocked until that correction.
