@@ -32,3 +32,7 @@ References checked September 19, 2026:
 ## Approved shipping integration
 
 Owner approved Shippo live rates and Site Configuration → Shipping. See [shipping settings and acceptance](SITE-CONFIGURATION.md#shipping--shippo--approved-v1-scope). Provider setup and measured packaging data are pending; earlier preview shipping charges remain non-production placeholders. Pickup and local delivery rules remain independent.
+
+## Owner-authorized shipping estimates
+
+Editable 12/24/36-cookie package presets and a provisional 2 oz per-cookie shipping weight are defined in [Site Configuration](SITE-CONFIGURATION.md#editable-package-estimates--owner-authorized). All are Estimated, not measured, and are configurable on the Shipping integration page. These unblock test quotes; pet-treat/mixed-product packing requires its own applicable rules.

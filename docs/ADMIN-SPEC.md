@@ -104,3 +104,7 @@ See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requeste
 ## Approved shipping integration
 
 Owner approved Shippo live rates and Site Configuration → Shipping. See [shipping settings and acceptance](SITE-CONFIGURATION.md#shipping--shippo--approved-v1-scope). Provider setup and measured packaging data are pending; earlier preview shipping charges remain non-production placeholders. Pickup and local delivery rules remain independent.
+
+## Shipping package configuration
+
+Site Configuration → Shipping → Package presets must expose dimensions, weight, units, capacity, product applicability and Estimated/Verified status. Start with the owner-authorized estimates in [Site Configuration](SITE-CONFIGURATION.md#editable-package-estimates--owner-authorized); allow measurement updates without deployment and invalidate affected quotes.

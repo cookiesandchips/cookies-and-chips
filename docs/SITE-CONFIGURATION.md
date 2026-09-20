@@ -66,3 +66,21 @@ Owner measures and weighs a fully packed one-dozen order and common larger order
 - Test/live credentials remain distinct and server-only; toggles and configuration edits are audited.
 
 Source: https://support.goshippo.com/hc/en-us/articles/4404415886491-Get-started-with-the-Shippo-API
+
+## Editable package estimates — owner authorized
+
+Use the following provisional human-cookie package presets for development and test quotes. These are planning assumptions, not measured packaging or verified carrier costs. All values are editable in Site Configuration → Shipping → Package presets.
+
+| Preset | Capacity | External dimensions (inches) | Empty packaging weight | Estimated packed weight at capacity |
+| --- | --- | --- | --- | --- |
+| One dozen | 12 cookies | 9 × 6 × 3 | 8 oz | 32 oz / 2 lb |
+| Two dozen | 24 cookies | 12 × 9 × 4 | 12 oz | 60 oz / 3.75 lb |
+| Three dozen | 36 cookies | 12 × 12 × 5 | 16 oz | 88 oz / 5.5 lb |
+
+Assume 2 oz finished weight per human cookie initially. Estimated packed weight = sum of item weights + empty packaging weight; empty weight includes box, inserts, liners and protective material. Do not add packaging twice. Stored product weights are configurable per product and separate from nutrition serving weights until verified. No assumption that every recipe produces identically sized cookies.
+
+Admin fields: preset name, enabled, capacity, applicable products/types, external length/width/height, dimension unit, empty packaging weight and unit, computed packed-weight preview, optional measured packed-weight override for an exact contents configuration, verification status, measured date and notes. Label the status Estimated or Verified. Default these presets to Estimated. Editing inputs immediately updates the preview; saving invalidates affected open shipping quotes. Require positive finite dimensions/weights, integer capacity and supported units. Convert to provider units server-side.
+
+Provisional packing: for human-cookie-only orders choose the smallest enabled preset with sufficient capacity up to 36 cookies. Beyond 36, allocate full 36-cookie boxes then the smallest sufficient preset for the remainder; calculate actual contents weight for each box, not full-capacity weight for every box. Example: 4 dozen → one 36-cookie box (88 oz) plus one 12-cookie box (32 oz). This is a deterministic starting rule, not a validated physical packing result. Pet treats/mixed product orders need applicable package rules; never apply human-cookie capacity blindly.
+
+Use these estimates for test-rate development now. Before live quotes/label purchase, measure sealed parcels or explicitly confirm continued use of estimates; keep unverified status visible to admin. Underestimated dimensions/weight can cause carrier adjustments. Changing a preset does not rewrite completed orders or purchased labels.
