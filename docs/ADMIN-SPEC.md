@@ -108,3 +108,7 @@ Owner approved Shippo live rates and Site Configuration → Shipping. See [shipp
 ## Shipping package configuration
 
 Site Configuration → Shipping → Package presets must expose dimensions, weight, units, capacity, product applicability and Estimated/Verified status. Start with the owner-authorized estimates in [Site Configuration](SITE-CONFIGURATION.md#editable-package-estimates--owner-authorized); allow measurement updates without deployment and invalidate affected quotes.
+
+## Required customer emails
+
+See [email notifications](EMAIL-NOTIFICATIONS.md) for account verification, paid-order confirmation, optional dispatch/tracking emails, admin notification status/resend and pending Resend/Supabase SMTP setup.

@@ -104,3 +104,7 @@ See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requeste
 ## Approved shipping integration
 
 Owner approved Shippo live rates and Site Configuration → Shipping. See [shipping settings and acceptance](SITE-CONFIGURATION.md#shipping--shippo--approved-v1-scope). Provider setup and measured packaging data are pending; earlier preview shipping charges remain non-production placeholders. Pickup and local delivery rules remain independent.
+
+## Required customer emails
+
+See [email notifications](EMAIL-NOTIFICATIONS.md) for account verification, paid-order confirmation, optional dispatch/tracking emails, admin notification status/resend and pending Resend/Supabase SMTP setup.

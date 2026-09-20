@@ -35,3 +35,5 @@ These are working project documents, not evidence of a completed website or conf
 [Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.
 
 - [Site Configuration: payment providers, tax and manual collection policy](SITE-CONFIGURATION.md)
+
+- [Account confirmation, order confirmation and tracking emails](EMAIL-NOTIFICATIONS.md)
