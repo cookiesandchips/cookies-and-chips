@@ -7,6 +7,6 @@ Owner approved adding soft gold and blush accents on September 20, 2026.
 - Blush background: #FBECEF
 - Preserve cream and chocolate as the primary palette and dark readable text.
 - Pair small decorative gold and pink hearts with the story; use gentle blush backgrounds and fine gold borders.
-- Do not publish a color-meaning statement until Heather confirms her intended meaning. Pink must not be described as general cancer awareness.
+- Owner confirmed that the brand’s gold and pink represent cancer awareness. My Story explains this as Cookies & Chips’ own symbolism honoring Ali, without claiming that pink universally represents every cancer.
 
 Applied to the homepage story, monthly feature, closing borders, newsletter/footer, and My Story introduction/photo frame. No logo or photograph changes.
