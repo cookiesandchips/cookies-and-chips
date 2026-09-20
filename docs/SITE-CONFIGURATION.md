@@ -37,3 +37,32 @@ Audit actor, timestamp, provider, mode, changed field names, test result and act
 - Enabled TaxJar uses returned tax; provider failures never silently become zero tax.
 - Payment disabled blocks payment independently of tax mode.
 - Live activation is explicit, audited and validated; switching mode revalidates outstanding quotes.
+
+## Shipping → Shippo — approved V1 scope
+
+Owner approved live carrier rates through Shippo and a third Site Configuration section, Shipping. This records scope; no account, connection or live shipping activation has been completed.
+
+Settings: shipping enabled/disabled; live carrier rates or owner-defined manual rates; dedicated test/live credentials and explicit live activation; Test Connection and sanitized status; private ship-from address; eligible destinations and carrier services; package presets with dimensions/units, empty packaging weight, capacity and packing rules; optional disclosed handling fee; explicit optional fallback rate. Use the credential protection and audit rules above. Do not infer activation from the provider account existing.
+
+Checkout builds parcels from purchased package quantities and validated packing rules. Weight includes finished products plus all packaging. Mixed products and multiple boxes must be supported by deterministic reviewed rules; if an order cannot be packed by a configured rule, do not invent dimensions or silently underquote. Use origin, destination, actual parcel dimensions/weights and allowed carrier services to fetch eligible rates. Display transit estimates separately from preparation time; do not promise guaranteed arrival unless the service explicitly supports that promise.
+
+Customer chooses a shipping service before payment. Server computes the shipping charge from the selected rate plus any configured handling fee, and passes that charge to tax calculation when enabled. Requote when cart, address, service, packing configuration or quote validity changes, and show any changed total before payment. Save carrier/service, parcel plan, quote reference, quoted postage, handling fee, total shipping charged and provider mode with the order. Later rate changes must not rewrite placed-order totals.
+
+Shipping OFF removes shipped delivery from new checkout choices and preserves existing shipments. Pickup and local delivery retain their independent rules. Test rates must not be used for real customer orders. Rate errors or no eligible services require retry, another fulfillment method, or an explicitly configured applicable fallback; never silently set shipping to zero. A manual/fallback charge is clearly identified and is not represented as a live carrier quote.
+
+Label purchase is separate from checkout rate lookup. Do not automatically buy postage merely because a customer requests rates or starts checkout. Label purchase, tracking and label refunds can be added as a subsequent operational workflow; this approval does not authorize paid label purchases now.
+
+### Required package data before live shipping
+
+Owner measures and weighs a fully packed one-dozen order and common larger orders. Record external box dimensions, total weight, empty packaging weight, capacity and actual product weights. Configure dispatch address, service area, allowed services and baking/dispatch schedule. Existing illustrative $10–$20 pricing and $15 preview rates are not live carrier rules.
+
+### Acceptance
+
+- One-dozen, multi-dozen, mixed-product and multi-box carts use correct validated parcel plans.
+- Only allowed destination/services render; no eligible service produces an actionable state.
+- Handling fee is applied once per configured rule and included in the reviewed total.
+- Address/cart changes invalidate stale quotes; duplicate rate requests cannot buy labels.
+- Rate failure uses only an explicitly configured applicable fallback and never implicit free shipping.
+- Test/live credentials remain distinct and server-only; toggles and configuration edits are audited.
+
+Source: https://support.goshippo.com/hc/en-us/articles/4404415886491-Get-started-with-the-Shippo-API

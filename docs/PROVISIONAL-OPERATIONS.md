@@ -28,3 +28,7 @@ References checked September 19, 2026:
 - https://support.taxjar.com/article/810-taxjar-api-which-endpoint-should-i-use-for-calculations
 - https://azdor.gov/model-city-tax-code/articles-and-sections/retail-sales-food-home-consumption
 - https://azdor.gov/business/transaction-privilege-tax
+
+## Approved shipping integration
+
+Owner approved Shippo live rates and Site Configuration → Shipping. See [shipping settings and acceptance](SITE-CONFIGURATION.md#shipping--shippo--approved-v1-scope). Provider setup and measured packaging data are pending; earlier preview shipping charges remain non-production placeholders. Pickup and local delivery rules remain independent.

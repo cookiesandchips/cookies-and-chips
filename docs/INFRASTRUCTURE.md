@@ -62,3 +62,7 @@ Vercel project is created and set up according to the owner; environment variabl
 ## September 20 controlling update
 
 [Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.
+
+## Approved shipping integration
+
+Owner approved Shippo live rates and Site Configuration → Shipping. See [shipping settings and acceptance](SITE-CONFIGURATION.md#shipping--shippo--approved-v1-scope). Provider setup and measured packaging data are pending; earlier preview shipping charges remain non-production placeholders. Pickup and local delivery rules remain independent.
