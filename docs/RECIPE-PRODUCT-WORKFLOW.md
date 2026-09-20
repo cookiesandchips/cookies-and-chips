@@ -41,3 +41,7 @@ External model/nutrition/image providers require a deliberate data-flow decision
 References reviewed September 19, 2026:
 - USDA nutrient API: https://fdc.nal.usda.gov/api-guide/
 - FDA allergen guidance: https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods/food-allergies
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.

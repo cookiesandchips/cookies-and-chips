@@ -58,3 +58,7 @@ Verify a dedicated Cookies & Chips sending domain and sender; configure a projec
 ## Latest owner update
 
 Vercel project is created and set up according to the owner; environment variables are not yet configured. Dashboard sign-in is required in the current browser before the exact project settings can be verified. Starting markup no longer blocks design; see [provisional operations](PROVISIONAL-OPERATIONS.md).
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.

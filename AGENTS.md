@@ -6,6 +6,6 @@ Only the Supabase project `vqebxtybuiegvfxawksf` is currently identified by the 
 
 Do not read unrelated repositories or credential files. Never log secret values. Commit only blank credential templates. Do not configure Vercel shared environment groups or reuse another application's PayPal app.
 
-Creative UI and commerce implementation are blocked until docs/BUILD-CONTRACT.md has an approved, deterministic specification package. Do not treat prior assistant proposals as approved product decisions. No migrations, production deployment, or live payments during foundation work.
+V1 implementation is authorized. Follow docs/SETUP-DECISIONS-2026-09-20.md: a single dedicated Supabase project for testing and production, no AI integration. Do not activate live payments or perform destructive database resets without explicit authorization.
 
 Categories, subcategories, collections and product types must remain data-driven and owner-editable. No hard-coded category enums or navigation lists.

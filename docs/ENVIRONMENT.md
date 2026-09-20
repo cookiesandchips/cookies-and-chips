@@ -25,3 +25,7 @@ At application activation, implement separate server-only and browser environmen
 The foundation check validates the committed template only; it does not validate real credentials, cloud settings, key ownership or runtime connections.
 
 Sources reviewed 2026-09-18: [Supabase keys](https://supabase.com/docs/guides/getting-started/api-keys), [Vercel environment scopes](https://vercel.com/docs/environment-variables), [Vercel sensitive variables](https://vercel.com/docs/environment-variables/sensitive-environment-variables).
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.

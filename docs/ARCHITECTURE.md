@@ -32,3 +32,7 @@ References: [PayPal idempotency](https://developer.paypal.com/reference/guidelin
 ## Recipe-derived product information
 
 See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requested recipe intake, reviewed nutrition/ingredient/allergen drafts, image and description generation, costing suggestions and strict public/private boundary.
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.

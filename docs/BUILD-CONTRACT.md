@@ -44,3 +44,7 @@ Performance budgets, browser/device support, image budgets, SEO requirements, ac
 ## Latest owner direction
 
 [Provisional operations](PROVISIONAL-OPERATIONS.md) supersede earlier starting-markup blockers: placeholder prices and best-guess fulfillment are authorized for development. Actual tax obligations and live rates must be configured before real orders.
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.

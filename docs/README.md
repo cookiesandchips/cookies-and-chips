@@ -29,3 +29,7 @@
 - [Environment-variable and secrets contract](ENVIRONMENT.md)
 
 These are working project documents, not evidence of a completed website or configured payment/tax services. Brand source files are available for viewing/download in the brand library. No credentials or private customer responses belong in this public repository.
+
+## September 20 controlling update
+
+[Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.
