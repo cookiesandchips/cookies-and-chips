@@ -1,0 +1,3 @@
+import {body,ownedOrder,failure} from '@/lib/checkout/server';
+import {complete} from '@/lib/checkout/complete';
+export async function POST(request:Request){try{const input=await body(request);const result=await complete(await ownedOrder(input.orderId),true);const o=result.order;return Response.json({id:o.id,status:o.status,mode:o.mode,total_cents:o.total_cents,emailSent:result.emailSent,createAccount:o.create_account},{headers:{'Cache-Control':'no-store'}});}catch(error){return failure(error);}}
