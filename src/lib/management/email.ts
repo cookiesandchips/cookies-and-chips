@@ -1,0 +1,2 @@
+import 'server-only';
+export async function sendEmail(to:string,subject:string,text:string,id:string){const key=process.env.EMAIL_PROVIDER_API_KEY,from=process.env.EMAIL_FROM;if(!key||!from)throw new Error('Email not configured');const r=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':id},body:JSON.stringify({from,to:[to],subject,text}),signal:AbortSignal.timeout(15000)});if(!r.ok)throw new Error('Email unavailable');}

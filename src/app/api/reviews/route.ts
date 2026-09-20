@@ -1,0 +1,4 @@
+import {body,db,failure} from '@/lib/checkout/server';
+import {customer} from '@/lib/management/auth';
+import {text,CheckoutError} from '@/lib/checkout/core';
+export async function POST(r:Request){try{const input=await body(r),user=await customer();if(!Number.isInteger(input.rating)||input.rating<1||input.rating>5)throw new CheckoutError('Choose a rating from 1 to 5.');const {count,error}=await db().from('commerce_reviews').select('*',{count:'exact',head:true}).eq('user_id',user.id);if(error)throw error;if((count||0)>=3)throw new CheckoutError('You have already submitted reviews. Contact us to update one.');const {error:saveError}=await db().from('commerce_reviews').insert({user_id:user.id,display_name:text(input.name,1,80),rating:input.rating,body:text(input.body,10,2000)});if(saveError)throw saveError;return Response.json({message:'Thank you! Your review has been submitted for approval.'});}catch(e){return failure(e);}}
