@@ -22,3 +22,8 @@ public/brand/generated-v1/
 public/brand/cookies-and-chips-logo.png
 public/brand/homepage-production-reference-2026-09-19.png
 public/brand/logo-package/
+
+# Private local business configuration
+.local/
+
+public/brand/story-section-reference.png
