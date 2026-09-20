@@ -96,3 +96,7 @@ Acceptance: Continue Shopping retains bag and filter selections; choosing anothe
 ## Recipe-derived product information
 
 See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requested recipe intake, reviewed nutrition/ingredient/allergen drafts, image and description generation, costing suggestions and strict public/private boundary.
+
+## Site Configuration and manual tax policy — controlling update
+
+[Site Configuration](SITE-CONFIGURATION.md) records approved UI management of sandbox/live PayPal and TaxJar credentials and activation. Owner explicitly chooses zero checkout tax collection when tax is unconfigured or disabled, with Cookies & Chips calculating/remitting applicable taxes manually. This supersedes earlier requirements to block checkout solely because tax is unconfigured/off. Enabled-provider failures still block rather than silently collect zero.

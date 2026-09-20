@@ -36,3 +36,7 @@ See [private recipe workflow](RECIPE-PRODUCT-WORKFLOW.md) for the owner-requeste
 ## September 20 controlling update
 
 [Current V1 setup decisions](SETUP-DECISIONS-2026-09-20.md) supersede conflicting earlier plans: implementation authorized, single dedicated Supabase environment, no AI integration, and configurable TaxJar.
+
+## Site Configuration and manual tax policy — controlling update
+
+[Site Configuration](SITE-CONFIGURATION.md) records approved UI management of sandbox/live PayPal and TaxJar credentials and activation. Owner explicitly chooses zero checkout tax collection when tax is unconfigured or disabled, with Cookies & Chips calculating/remitting applicable taxes manually. This supersedes earlier requirements to block checkout solely because tax is unconfigured/off. Enabled-provider failures still block rather than silently collect zero.
