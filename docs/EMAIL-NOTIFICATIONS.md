@@ -28,7 +28,7 @@ Responsive, readable transactional layout: supplied logo, paper/cream background
 
 ## Setup still needed
 
-Resend account exists but setup is pending. Verify a Cookies & Chips sending domain using Resend-provided DNS records, choose a sender address and monitored support/reply-to address, configure server sending credentials and Supabase custom SMTP. EMAIL_PROVIDER_API_KEY and EMAIL_FROM remain application variables; configure Auth SMTP separately. admin@cookiesandchips.com is the intended admin identity, not an automatically confirmed sending mailbox. No real email is sent by the current prototype.
+Owner reports verified sending domain notifications.cookiesandchips.com, configured Supabase custom SMTP and Vercel email credentials. Live delivery remains untested. Confirm the actual sender and a monitored support/reply-to address. See AUTH-IMPLEMENTATION.md for current implementation and connection steps. EMAIL_PROVIDER_API_KEY and EMAIL_FROM remain application variables; configure Auth SMTP separately. admin@cookiesandchips.com is the intended admin identity, not an automatically confirmed sending mailbox. No real email is sent by the current prototype.
 
 ## Acceptance
 

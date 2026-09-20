@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function ErrorPage(){return <section className="card"><h1>Let’s try that link again</h1><p>This link could not be verified. It may have expired, already been used, or been opened in a different browser.</p><Link className="button" href="/account">Request a new link or sign in</Link></section>}

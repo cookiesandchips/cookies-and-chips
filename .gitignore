@@ -15,3 +15,10 @@ supabase/.branches/
 *.key
 .DS_Store
 *.tsbuildinfo
+
+# Generated customer review assets
+public/review/
+public/brand/generated-v1/
+public/brand/cookies-and-chips-logo.png
+public/brand/homepage-production-reference-2026-09-19.png
+public/brand/logo-package/

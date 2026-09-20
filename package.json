@@ -3,6 +3,35 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Isolated pre-implementation foundation for Cookies & Chips",
-  "scripts": { "check": "node scripts/check-foundation.mjs" }
+  "description": "Cookies & Chips storefront and management application",
+  "scripts": {
+    "check": "node scripts/check-foundation.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "prebuild": "node scripts/prepare-review.mjs",
+    "predev": "node scripts/prepare-review.mjs"
+  },
+  "dependencies": {
+    "@fontsource/dm-serif-display": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": "24.x"
+  }
 }

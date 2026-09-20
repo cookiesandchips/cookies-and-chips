@@ -22,3 +22,7 @@ Dedicated Supabase project: `vqebxtybuiegvfxawksf`.
 Run `npm run check` to check foundation invariants. No package installation or credentials are needed. Copy `.env.example` to ignored `.env.local` only when configuring this project. Do not paste secrets into chat or commit them.
 
 The framework and SDK dependency installation is deferred until the contract gate is approved. The initial package manifest is tooling only; it is not a deployable Next.js application. At activation, install and lock reviewed versions of Next.js, React, TypeScript and Supabase packages inside this repository.
+
+## Account implementation
+
+The initial Next.js account flow is now implemented locally. See [account implementation and connection checklist](docs/AUTH-IMPLEMENTATION.md) for commands, email templates, cloud configuration and remaining live checks. The full storefront prototype remains in docs/visual-review; checkout and order emails are not yet live.
