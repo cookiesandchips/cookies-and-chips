@@ -1,0 +1,3 @@
+import 'server-only';
+import {CheckoutError} from '../checkout/core';
+export async function usda(path:string,payload?:unknown){const key=process.env.USDA_FDC_API_KEY?.trim();if(!key)throw new CheckoutError('Add USDA_FDC_API_KEY in Vercel before searching ingredients.',503);const response=await fetch('https://api.nal.usda.gov/fdc/v1/'+path,{method:payload?'POST':'GET',headers:{'X-Api-Key':key,'Content-Type':'application/json'},...(payload?{body:JSON.stringify(payload)}:{}),signal:AbortSignal.timeout(20000),cache:'no-store'});if(!response.ok)throw new CheckoutError(response.status===429?'USDA search limit reached. Try again later.':'USDA is unavailable. Your published recipe has not changed.',502);return response.json();}

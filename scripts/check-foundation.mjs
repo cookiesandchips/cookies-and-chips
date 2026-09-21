@@ -17,7 +17,7 @@ const expected = {
   PAYPAL_CLIENT_SECRET: '', PAYPAL_WEBHOOK_ID: '', PAYPAL_ENVIRONMENT: 'sandbox',
   EMAIL_FROM: '', EMAIL_PROVIDER_API_KEY: '',
   USDA_FDC_API_KEY: '', TAXJAR_SANDBOX_API_TOKEN: '', TAXJAR_LIVE_API_TOKEN: '',
-  TAXJAR_ENVIRONMENT: 'sandbox', TAXJAR_ENABLED: 'true', CONTACT_EMAIL: '', SHIPPO_TEST_API_TOKEN: '', SHIPPO_LIVE_API_TOKEN: '',
+  TAXJAR_ENVIRONMENT: 'sandbox', TAXJAR_ENABLED: 'true', CONTACT_EMAIL: '', SHIPPO_TEST_API_TOKEN: '', SHIPPO_LIVE_API_TOKEN: '', INTEGRATION_ENCRYPTION_KEY: '',
 };
 const entries = read('.env.example').split(/\r?\n/).filter((line) => line && !line.startsWith('#')).map((line) => {
   const split = line.indexOf('=');
