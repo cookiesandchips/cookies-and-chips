@@ -1,0 +1,1 @@
+export function distanceMiles(a:{lat:number;lon:number},b:{lat:number;lon:number}){const rad=(n:number)=>n*Math.PI/180;const h=Math.sin(rad(b.lat-a.lat)/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(rad(b.lon-a.lon)/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(Math.min(1,h)),Math.sqrt(Math.max(0,1-h)));}

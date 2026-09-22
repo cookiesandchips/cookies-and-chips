@@ -1,0 +1,5 @@
+import 'server-only';
+import {db} from '@/lib/checkout/server';
+import {legacyId,type Term} from './taxonomy-core';
+export {assignments,validateAssignments,publicAssignments} from './taxonomy-core';
+export async function taxonomy(products?:any[]){if(!products){const {data,error}=await db().from('commerce_products').select('details');if(error)throw error;products=data||[];}const terms=new Map<string,Term>();for(const p of products){const d=p.details||{};const category=d.category?legacyId('category',d.category):'';for(const kind of ['category','subcategory','collection'] as const){if(Array.isArray(d[kind+'Ids'])||!d[kind])continue;const parentId=kind==='subcategory'?category:undefined;if(kind==='subcategory'&&!parentId)continue;const id=legacyId(kind,d[kind],parentId);terms.set(id,{id,kind,name:d[kind],...(parentId?{parentId}:{})});}}const {data,error}=await db().from('commerce_settings').select('value').like('key','taxonomy:%');if(error)throw error;for(const r of data||[])terms.set(r.value.id,r.value);return [...terms.values()].sort((a,b)=>a.name.localeCompare(b.name));}

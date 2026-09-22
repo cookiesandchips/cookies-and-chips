@@ -1,0 +1,8 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {legacyId,assignments,validateAssignments,publicAssignments,type Term} from '../src/lib/management/taxonomy-core';
+const terms:Term[]=[{id:legacyId('category','Cookies'),kind:'category',name:'Cookies'},{id:'c2',kind:'category',name:'Gifts'},{id:'s1',kind:'subcategory',name:'Chocolate lovers',parentId:'c2'},{id:'l1',kind:'collection',name:'Seasonal'}];
+test('legacy assignments are preserved and explicitly empty assignments stay empty',()=>{assert.deepEqual(assignments({category:'Cookies'},terms).categoryIds,[terms[0].id]);assert.deepEqual(assignments({category:'Cookies',categoryIds:[]},terms).categoryIds,[]);});
+test('multiple assignments resolve and subcategories require their parent category',()=>{const d=validateAssignments({categoryIds:[terms[0].id],subcategoryIds:['s1'],collectionIds:['l1']},terms);assert.deepEqual(d.categoryIds,[terms[0].id,'c2']);assert.deepEqual(publicAssignments(d,terms).categories,['Cookies','Gifts']);assert.deepEqual(publicAssignments(d,terms).collections,['Seasonal']);});
+test('unknown groups and wrong group types cannot be saved',()=>{assert.throws(()=>validateAssignments({categoryIds:['missing']},terms));assert.throws(()=>validateAssignments({categoryIds:['l1']},terms));assert.throws(()=>validateAssignments({categoryIds:[]},terms));});
+test('renaming stable terms updates product labels without changing assignments',()=>{const renamed=terms.map(t=>t.id==='c2'?{...t,name:'Gift boxes'}:t);assert.deepEqual(publicAssignments({categoryIds:['c2']},renamed).categories,['Gift boxes']);});
