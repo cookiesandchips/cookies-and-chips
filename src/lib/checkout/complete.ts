@@ -35,5 +35,6 @@ export async function complete(o:Order,allowCapture:boolean){
  const {error}=await db().rpc('complete_commerce_order',{p_order_id:o.id,p_paypal_id:o.paypal_order_id,p_capture_id:evidence.id,p_total_cents:evidence.total});
  if(error)throw new CheckoutError('Payment is being reconciled. Please check again; do not place another order.',503);
  const {data:paid,error:readError}=await db().from('commerce_orders').select('*').eq('id',o.id).single();if(readError||!paid)throw new CheckoutError('Payment is saved. Please check the order again.',503);
- return {order:paid,emailSent:await notifyOrder(paid)};
+ const paidOrder=paid as Order;
+ return {order:paidOrder,emailSent:await notifyOrder(paidOrder)};
 }
