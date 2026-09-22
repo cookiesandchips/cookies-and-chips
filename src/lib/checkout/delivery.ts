@@ -8,6 +8,6 @@ async function coordinates(a:Address){
 }
 export async function localDelivery(origin:Address,destination:Address){
  const [from,to]=await Promise.all([coordinates(origin),coordinates(destination)]);const miles=distanceMiles(from,to);
- if(miles>10)throw new CheckoutError('This address is outside our approximate 10-mile free-delivery area. Please choose pickup or an available shipping service.');
+ if(miles>10)return null;
  return {distanceMiles:Math.round(miles*100)/100,radiusMiles:10,basis:'straight-line',verifiedAt:new Date().toISOString()};
 }
