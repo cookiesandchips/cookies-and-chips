@@ -28,3 +28,5 @@ main:has(.account-entry),main:has(.account-signed-in){max-width:1080px}.account-
 .checkout-summary{position:static}.checkout-columns{grid-template-columns:minmax(0,1fr) minmax(380px,1.15fr)}@media(max-width:800px){.checkout-columns{grid-template-columns:1fr}}
 
 .checkout-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #F7E8CF}.checkout-item>div{min-width:0}.checkout-item p{margin:4px 0 0;font-size:14px}.checkout-item .checkout-quantity{flex:0 0 85px;margin:0;font-size:12px}.checkout-quantity select{width:85px;min-height:40px;padding:8px;margin:4px 0 0}
+
+.checkout-error{border:2px solid #9b3429;color:#72271f;scroll-margin:24px}.checkout-mode{font-weight:600}.checkout-totals{scroll-margin:24px}.integration-fields{border:0;padding:0;margin:0;min-width:0}.integration-save{position:sticky;bottom:0;background:#fffaf5;border-top:1px solid #E5B56B;padding:12px 16px;margin-top:24px;z-index:2}.integration-save p{margin:4px 0 12px}.integration-save .message{border:1px solid #E5B56B}
