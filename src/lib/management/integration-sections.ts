@@ -1,4 +1,4 @@
-import {CheckoutError} from '../checkout/core';
+import {CheckoutError} from '../checkout/errors';
 export const integrationSections={
  'Payment processing':['paymentProvider','paymentEnabled','paymentMode'],
  'Sales tax':['taxEnabled','taxMode'],
