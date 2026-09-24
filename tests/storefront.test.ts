@@ -9,3 +9,13 @@ test('corrupt storage does not break storefront startup',()=>{const r=runtime();
 test('storefront has accessible account icon and working story destination without review toolbar',()=>{assert.match(html,/class="profile-link"[^>]*aria-label="My account"/);assert.match(html,/href="\/my-story"/);assert.doesNotMatch(html,/<div class="review">/);assert.doesNotMatch(html,/<a href="\/account">Account<\/a>/);});
 test('nutrition panel shows one-cookie serving, daily values, and unavailable nutrients safely',()=>{const r=runtime();const panel=r.run("nutritionFacts({servingsPerContainer:12,servingGrams:42,values:{calories:200,fat:7.8,protein:null}})");assert.match(panel,/1 cookie \(42 g\)/);assert.match(panel,/12 servings per container/);assert.match(panel,/10%/);assert.match(panel,/Not available/);assert.match(panel,/Estimated from USDA/);});
 test('shop grouping recognizes all assigned groups and legacy products',()=>{const r=runtime();assert.equal(r.run("groupValues({categories:['Cookies','Gifts']},'category').includes('Gifts')"),true);assert.equal(r.run("groupValues({category:'Cookies'},'category')[0]"),'Cookies');assert.equal(r.run("groupValues({collections:['Seasonal','Favorites']},'collection').length"),2);});
+test('initial and failed catalog loads never render default product photos',()=>{
+ const r=runtime();
+ r.run("document.querySelector=()=>({set innerHTML(value){document.markup=value;}}); render()");
+ const pending=r.run('document.markup');assert.match(pending,/Loading our latest/);assert.doesNotMatch(pending,/generated-v1|pumpkin-patch|sandies-treats|Ali’s Classic/);
+ r.run('catalogError=true;render()');const failed=r.run('document.markup');assert.match(failed,/Try again/);assert.doesNotMatch(failed,/generated-v1|pumpkin-patch|sandies-treats/);
+});
+test('loaded homepage cards, monthly feature and gallery use saved product images',()=>{
+ const r=runtime();r.run("document.querySelector=()=>({set innerHTML(value){document.markup=value;}});catalog.length=0;catalog[0]={name:'Updated cookie',image:'https://example.com/updated-cookie.png',description:'Saved description',price:12,unit:'dozen',active:true};siteContent.monthlyProductId='0';catalogReady=true;render()");
+ const rendered=r.run('document.markup');assert.equal((rendered.match(/src="https:\/\/example.com\/updated-cookie.png"/g)||[]).length,3);assert.doesNotMatch(rendered,/src="\/brand\/generated-v1\//);
+});
