@@ -28,6 +28,8 @@ export async function complete(o:Order,allowCapture:boolean){
  if(o.status!=='awaiting_payment'||!o.paypal_order_id)throw new CheckoutError('This order has not been approved for payment.',409);
  let result=await paypal('/v2/checkout/orders/'+o.paypal_order_id,o.mode);
  if(result.status==='APPROVED'&&allowCapture){
+  const authentication=result.payment_source?.google_pay?.card?.authentication_result;
+  if(authentication&&!['POSSIBLE','YES'].includes(authentication.liability_shift))throw new CheckoutError('Google Pay authentication could not be verified. Please choose another payment method.',409);
   if(!(o.tax_details as any).saleAgreement?.acceptedAt)throw new CheckoutError('Sale agreement acceptance is missing. Return to checkout and review your order.',409);
   try{await paypal('/v2/checkout/orders/'+o.paypal_order_id+'/capture',o.mode,'POST',{},o.id);}catch{/* Reconcile remotely before reporting an uncertain payment. */}
   result=await paypal('/v2/checkout/orders/'+o.paypal_order_id,o.mode);
