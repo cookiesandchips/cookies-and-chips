@@ -46,6 +46,14 @@ test('PayPal test checks only authentication and the bakery capture webhook on t
  assert.equal(calls[1].url,'https://api-m.paypal.com/v1/notifications/webhooks/hook');assert.equal(calls[1].options.method,undefined);
  assert.doesNotMatch(JSON.stringify(result),/temporary|secret/);
 });
+test('PayPal names whether the client pair or the webhook ID was rejected',async()=>{
+ const auth=await checkConnection('paypal','live',{paypalLiveId:'id',paypalLiveSecret:'secret-value',paypalLiveWebhook:'hook'},fakeFetch([{status:401,body:{error:'secret-value'}}],[]));
+ assert.equal(auth.ok,false);assert.match(auth.message,/rejected the Live Client ID/);assert.doesNotMatch(auth.message,/secret-value/);
+ const missingHook=await checkConnection('paypal','live',{paypalLiveId:'id',paypalLiveSecret:'secret-value',paypalLiveWebhook:'hook'},fakeFetch([{body:{access_token:'temporary'}},{status:404,body:{name:'INVALID_RESOURCE_ID',id:'hook'}}],[]));
+ assert.equal(missingHook.ok,false);assert.match(missingHook.message,/accepted the Client ID/);assert.doesNotMatch(JSON.stringify(missingHook),/secret-value|temporary/);
+ const url=await checkConnection('paypal','live',{paypalLiveId:'id',paypalLiveSecret:'secret',paypalLiveWebhook:'https://www.cookiesandchips.com/api/paypal/webhook'},fakeFetch([],[]));
+ assert.match(url.message,/not the webhook URL/);
+});
 test('wrong webhook cannot pass connection checks',async()=>{
  const result=await checkConnection('paypal','sandbox',{paypalSandboxId:'id',paypalSandboxSecret:'secret',paypalSandboxWebhook:'hook'},fakeFetch([{body:{access_token:'temporary'}},{body:{url:'https://elsewhere.test/webhook',event_types:[{name:'PAYMENT.CAPTURE.COMPLETED'}]}}],[]));assert.equal(result.ok,false);assert.match(result.message,/webhook/);
 });

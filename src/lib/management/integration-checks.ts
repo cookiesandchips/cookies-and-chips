@@ -15,10 +15,14 @@ export async function checkConnection(provider:Provider,mode:Mode,values:Record<
  try{
   if(provider==='paypal'){
    const [id,secret,webhook]=names.map(name=>values[name]);
+   const environment=mode==='live'?'Live':'Sandbox';
+   if(webhook.includes('/')||webhook.includes('http'))return result(false,`The ${environment} Webhook ID must be the ID from PayPal’s webhook list, not the webhook URL. The active configuration has not changed.`);
    const base=mode==='live'?'https://api-m.paypal.com':'https://api-m.sandbox.paypal.com';
-   const token=await read(base+'/v1/oauth2/token',{method:'POST',headers:{Authorization:'Basic '+Buffer.from(id+':'+secret).toString('base64'),'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=client_credentials'});
-   if(typeof token.access_token!=='string'||!token.access_token)throw new Error('missing-token');
-   const hook=await read(base+'/v1/notifications/webhooks/'+encodeURIComponent(webhook),{headers:{Authorization:'Bearer '+token.access_token}});
+   let token;
+   try{token=await read(base+'/v1/oauth2/token',{method:'POST',headers:{Authorization:'Basic '+Buffer.from(id+':'+secret).toString('base64'),'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=client_credentials'});}catch{return result(false,`PayPal rejected the ${environment} Client ID and Client secret. Use the pair from the ${environment} app, not the other environment. The active configuration has not changed.`);}
+   if(typeof token.access_token!=='string'||!token.access_token)return result(false,`PayPal rejected the ${environment} Client ID and Client secret. Use the pair from the ${environment} app, not the other environment. The active configuration has not changed.`);
+   let hook;
+   try{hook=await read(base+'/v1/notifications/webhooks/'+encodeURIComponent(webhook),{headers:{Authorization:'Bearer '+token.access_token}});}catch{return result(false,`PayPal accepted the Client ID and secret, but that Webhook ID is not on the ${environment} app. Paste the ID from that app’s webhook list. The active configuration has not changed.`);}
    if(!['https://www.cookiesandchips.com/api/paypal/webhook','https://cookiesandchips.com/api/paypal/webhook'].includes(hook.url)||!hook.event_types?.some((event:any)=>['PAYMENT.CAPTURE.COMPLETED','*'].includes(event.name)))return result(false,'PayPal credentials work, but the webhook must point to this bakery’s /api/paypal/webhook and include PAYMENT.CAPTURE.COMPLETED.');
   }else if(provider==='shippo'){
    const token=values[names[0]];
