@@ -11,6 +11,17 @@ export function requiredSecrets(provider:Provider,mode:Mode):SecretName[]{
  const suffix=mode==='live'?'Live':'Sandbox';
  return (provider==='paypal'?['Id','Secret','Webhook'].map(field=>'paypal'+suffix+field):[provider+suffix+'Token']) as SecretName[];
 }
+const paypalFieldLabels={Id:'Client ID',Secret:'Client Secret',Webhook:'Webhook ID'} as const;
+export function missingPayPalFields(mode:Mode,values:Record<string,string>){
+ const suffix=mode==='live'?'Live':'Sandbox';
+ return (['Id','Secret','Webhook'] as const).filter(field=>!values['paypal'+suffix+field]).map(field=>paypalFieldLabels[field]);
+}
+export function missingPayPalMessage(mode:Mode,values:Record<string,string>){
+ const missing=missingPayPalFields(mode,values);
+ if(!missing.length)return '';
+ const title=mode==='live'?'Live':'Sandbox';
+ return `Missing ${title} PayPal configuration:\n${missing.map(name=>'- '+name).join('\n')}`;
+}
 function envMode(value:string|undefined):Mode{
  const mode=(value||'sandbox').trim().toLowerCase();
  if(['live','production'].includes(mode))return 'live';
@@ -41,7 +52,10 @@ export function validateReady(config:any,values:Record<string,string>){
  for(const provider of ['paypal','taxjar','shippo'] as const){
   if(!config[enabledKey[provider]])continue;
   const names=requiredSecrets(provider,config[modeKey[provider]]);
-  if(names.some(name=>!values[name]))throw new CheckoutError(`${{paypal:'PayPal',taxjar:'TaxJar',shippo:'Shippo'}[provider]} ${config[modeKey[provider]]} credentials are incomplete. Add them here or disable this service before saving.`);
+  if(names.some(name=>!values[name])){
+   if(provider==='paypal')throw new CheckoutError(missingPayPalMessage(config[modeKey[provider]],values)+'\nAdd the missing fields here or disable payments before saving.');
+   throw new CheckoutError(`${{taxjar:'TaxJar',shippo:'Shippo'}[provider]} ${config[modeKey[provider]]} credentials are incomplete. Add them here or disable this service before saving.`);
+  }
  }
  if(config.paymentEnabled&&config.paymentMode==='live'&&((config.taxEnabled&&config.taxMode!=='live')||(config.shippingEnabled&&config.shippingMode!=='live')))throw new CheckoutError('Set enabled tax and shipping services to live before activating live payments.');
 }

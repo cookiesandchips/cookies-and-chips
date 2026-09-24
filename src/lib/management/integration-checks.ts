@@ -1,12 +1,12 @@
 import {CheckoutError} from '../checkout/errors';
-import {requiredSecrets,type Mode,type Provider} from './integration-policy';
+import {missingPayPalMessage,requiredSecrets,type Mode,type Provider} from './integration-policy';
 export type ConnectionCheck={provider:Provider;mode:Mode;ok:boolean;checkedAt:string;message:string};
 export async function checkConnection(provider:Provider,mode:Mode,values:Record<string,string>,request:typeof fetch=fetch):Promise<ConnectionCheck>{
  const label={paypal:'PayPal',taxjar:'TaxJar',shippo:'Shippo'}[provider];
  const result=(ok:boolean,message:string)=>({provider,mode,ok,checkedAt:new Date().toISOString(),message});
  if(!['sandbox','live'].includes(mode))throw new CheckoutError('Choose sandbox or live.');
  const names=requiredSecrets(provider,mode);
- if(names.some(name=>!values[name]))return result(false,`${label} ${mode} credentials are incomplete. Fill in the required fields before testing.`);
+ if(names.some(name=>!values[name]))return result(false,provider==='paypal'?missingPayPalMessage(mode,values):`${label} ${mode} credentials are incomplete. Fill in the required fields before testing.`);
  async function read(url:string,options:RequestInit){
   const response=await request(url,{...options,cache:'no-store',redirect:'error',signal:AbortSignal.timeout(10000)});
   if(!response.ok)throw new Error('provider-request-failed');

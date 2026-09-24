@@ -64,5 +64,10 @@ test('TaxJar uses the selected environment and failures expose no provider body 
  const timeout=await checkConnection('shippo','live',{shippoLiveToken:'shippo_live_private'},fakeFetch([new Error('private exception')],[]));assert.equal(timeout.ok,false);assert.doesNotMatch(JSON.stringify(timeout),/private/);
 });
 test('missing credentials return actionable results without provider requests',async()=>{
- const calls:any[]=[];const result=await checkConnection('paypal','live',{},fakeFetch([],calls));assert.equal(result.ok,false);assert.match(result.message,/incomplete/);assert.equal(calls.length,0);
+ const calls:any[]=[];const result=await checkConnection('paypal','live',{},fakeFetch([],calls));assert.equal(result.ok,false);assert.equal(calls.length,0);
+ assert.equal(result.message,'Missing Live PayPal configuration:\n- Client ID\n- Client Secret\n- Webhook ID');
+ const webhookOnly=await checkConnection('paypal','live',{paypalLiveId:'public-id',paypalLiveSecret:'do-not-print'},fakeFetch([],[]));
+ assert.equal(webhookOnly.message,'Missing Live PayPal configuration:\n- Webhook ID');
+ assert.doesNotMatch(webhookOnly.message,/do-not-print|public-id/);
+ assert.throws(()=>validateReady({paymentEnabled:true,paymentMode:'live',taxEnabled:false,shippingEnabled:false},{paypalLiveId:'public-id'}),/Missing Live PayPal configuration:\n- Client Secret\n- Webhook ID/);
 });
