@@ -5,8 +5,8 @@ function load(src:string){let promise=scripts.get(src);if(!promise){promise=new 
 function bounded<T>(promise:Promise<T>){return new Promise<T>((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Payment options took too long to load. Please reload checkout.')),20000);promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});});}
 async function post(path:string,body:unknown){const r=await fetch('/api/checkout/'+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.error||'Payment could not be confirmed.');return d;}
 export default function PaymentMethods({order,config,onError,onBusy}:{order:any;config:any;onError:(message:string)=>void;onBusy:(busy:boolean)=>void}){
- const holder=useRef<HTMLDivElement>(null),googleHolder=useRef<HTMLDivElement>(null),callbacks=useRef({onError,onBusy});callbacks.current={onError,onBusy};
- const [loading,setLoading]=useState(true);
+ const paypalHolder=useRef<HTMLDivElement>(null),venmoHolder=useRef<HTMLDivElement>(null),cardHolder=useRef<HTMLDivElement>(null),googleHolder=useRef<HTMLDivElement>(null),callbacks=useRef({onError,onBusy});callbacks.current={onError,onBusy};
+ const [loading,setLoading]=useState(true),[showCard,setShowCard]=useState(false);
  useEffect(()=>{
   let disposed=false;const buttons:any[]=[];const fail=(message:string)=>{if(!disposed){callbacks.current.onError(message);callbacks.current.onBusy(false);}};
   const finish=()=>window.location.assign('/checkout/return?order='+encodeURIComponent(order.id));
@@ -15,9 +15,11 @@ export default function PaymentMethods({order,config,onError,onBusy}:{order:any;
    const params=new URLSearchParams({'client-id':config.paypalClientId,currency:'USD',intent:'capture',commit:'true',components:'buttons,googlepay,funding-eligibility','enable-funding':'venmo','disable-funding':'paylater,credit'});
    await bounded(load('https://www.paypal.com/sdk/js?'+params));if(disposed)return;
    const paypal=(window as any).paypal;
+   const slots:Record<string,HTMLDivElement|null>={[paypal.FUNDING.PAYPAL]:paypalHolder.current,[paypal.FUNDING.VENMO]:venmoHolder.current,[paypal.FUNDING.CARD]:cardHolder.current};
    for(const fundingSource of [paypal.FUNDING.PAYPAL,paypal.FUNDING.VENMO,paypal.FUNDING.CARD]){
-    const button=paypal.Buttons({fundingSource,style:{layout:'vertical',label:'pay',height:48},createOrder:create,onApprove:finish,onCancel:()=>fail('Payment was cancelled. Your order has not been completed.'),onError:()=>fail('Payment could not be completed. Please retry this same order.')});
-    if(button.isEligible()){const container=document.createElement('div');holder.current?.appendChild(container);buttons.push(button);await bounded(button.render(container));}
+    const button=paypal.Buttons({fundingSource,style:{layout:'vertical',label:'pay',height:48,shape:'rect'},createOrder:create,onApprove:finish,onCancel:()=>fail('Payment was cancelled. Your order has not been completed.'),onError:()=>fail('Payment could not be completed. Please retry this same order.')});
+    const container=slots[fundingSource];
+    if(button.isEligible()&&container){buttons.push(button);await bounded(button.render(container));if(fundingSource===paypal.FUNDING.CARD&&!disposed)setShowCard(true);}
    }
    if(!disposed)setLoading(false);
    // Optional wallet: eligibility/configuration failure must not disable PayPal.
@@ -33,7 +35,7 @@ export default function PaymentMethods({order,config,onError,onBusy}:{order:any;
    }catch{/* Unsupported merchant/device: do not advertise an unavailable wallet. */}
   }
   setup().catch(e=>{if(!disposed)setLoading(false);fail((e as Error).message);});
-  return()=>{disposed=true;for(const button of buttons)button.close().catch(()=>{});holder.current?.replaceChildren();googleHolder.current?.replaceChildren();};
+  return()=>{disposed=true;for(const button of buttons)button.close().catch(()=>{});paypalHolder.current?.replaceChildren();venmoHolder.current?.replaceChildren();cardHolder.current?.replaceChildren();googleHolder.current?.replaceChildren();};
  },[order.id,order.mode,order.total_cents,config.paypalClientId,config.agreement.version]);
- return <div aria-label="Secure payment methods">{loading&&<p role="status">Loading secure payment options…</p>}<div ref={holder}/><div ref={googleHolder}/><p>Available payment options depend on your device and account.</p></div>;
+ return <div className="pay-methods" aria-label="Secure payment methods"><div className="pay-express"><h2>Express checkout</h2><div ref={paypalHolder}/><div ref={venmoHolder}/><div ref={googleHolder}/></div>{showCard&&<p className="pay-or"><span>or pay with a card</span></p>}<div ref={cardHolder}/>{loading&&<p role="status">Loading secure payment options…</p>}<p className="pay-note">Available payment options depend on your device and account.</p></div>;
 }
