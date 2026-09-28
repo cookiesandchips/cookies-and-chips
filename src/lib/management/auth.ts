@@ -4,6 +4,7 @@ import {serverClient} from '@/lib/supabase/server';
 import {db} from '@/lib/checkout/server';
 import {CheckoutError} from '@/lib/checkout/core';
 export async function customer(){const client=await serverClient();const {data:{user}}=await client.auth.getUser();if(!user?.email_confirmed_at)throw new CheckoutError('Please sign in with a confirmed email address.',401);return user;}
+export async function headerAccount(){try{const user=await customer();const {data,error}=await db().from('commerce_admins').select('user_id').eq('user_id',user.id).maybeSingle();return {isAdmin:!error&&!!data};}catch{return null;}}
 export async function admin(){const user=await customer();const {data,error}=await db().from('commerce_admins').select('user_id').eq('user_id',user.id).maybeSingle();if(error||!data)throw new CheckoutError('Administrator access is required.',403);return user;}
 export async function audit(actor:string,action:string,id?:string){await db().from('commerce_audit').insert({actor_id:actor,action,record_id:id});}
 export async function publicSite(){const {data,error}=await db().from('commerce_settings').select('value').eq('key','public_site').single();if(error)throw error;// Owner approved Census address checks on 2026-09-22. Persist the initial choice
