@@ -2,11 +2,12 @@ import 'server-only';
 import {db,type Order} from './server';
 import {paypal,captureEvidence} from './providers';
 import {CheckoutError,money} from './core';
-import {paidReceipt} from './receipt';
+import {adminNotice,paidReceipt} from './receipt';
+const ADMIN_EMAIL='admin@cookiesandchips.com';
 export async function notifyOrder(o:Order){
  if(o.status!=='paid')return false;
  const database=db();
- const {data:existing}=await database.from('commerce_notifications').select('state,created_at').eq('order_id',o.id).single();
+ const {data:existing}=await database.from('commerce_notifications').select('state,created_at').eq('order_id',o.id).eq('kind','order_confirmation').maybeSingle();
  if(existing?.state==='sent')return true;
  // Avoid replaying a provider request beyond its idempotency retention window.
  if(existing&&Date.now()-Date.parse(existing.created_at)>23*3600000)return false;
@@ -19,12 +20,30 @@ export async function notifyOrder(o:Order){
  const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'order-confirmation/'+o.id},body:JSON.stringify({from,to:[o.email],...receipt}),signal:AbortSignal.timeout(15000)});
  if(!response.ok)throw new Error('Email provider rejected request');
  const result=await response.json();
- await database.from('commerce_notifications').update({state:'sent',provider_id:result.id,last_error:null}).eq('order_id',o.id);
+ await database.from('commerce_notifications').update({state:'sent',provider_id:result.id,last_error:null}).eq('order_id',o.id).eq('kind','order_confirmation');
  return true;
- }catch{await database.from('commerce_notifications').update({state:'failed',last_error:'Confirmation delivery requires retry.'}).eq('order_id',o.id);return false;}
+ }catch{await database.from('commerce_notifications').update({state:'failed',last_error:'Confirmation delivery requires retry.'}).eq('order_id',o.id).eq('kind','order_confirmation');return false;}
+}
+export async function notifyAdmin(o:Order){
+ if(o.status!=='paid')return false;
+ const database=db();
+ const {data:existing}=await database.from('commerce_notifications').select('state,created_at').eq('order_id',o.id).eq('kind','admin_order').maybeSingle();
+ if(existing?.state==='sent')return true;
+ if(existing&&Date.now()-Date.parse(existing.created_at)>23*3600000)return false;
+ if(!existing){const {error}=await database.from('commerce_notifications').insert({order_id:o.id,kind:'admin_order'});if(error&&error.code!=='23505')return false;}
+ try{
+ const key=process.env.EMAIL_PROVIDER_API_KEY,from=process.env.EMAIL_FROM;
+ if(!key||!from)throw new Error('Email configuration missing');
+ const notice=adminNotice(o);
+ const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json','Idempotency-Key':'admin-order/'+o.id},body:JSON.stringify({from,to:[ADMIN_EMAIL],reply_to:o.email,...notice}),signal:AbortSignal.timeout(15000)});
+ if(!response.ok)throw new Error('Email provider rejected request');
+ const result=await response.json();
+ await database.from('commerce_notifications').update({state:'sent',provider_id:result.id,last_error:null}).eq('order_id',o.id).eq('kind','admin_order');
+ return true;
+ }catch{await database.from('commerce_notifications').update({state:'failed',last_error:'Bakery notice requires retry.'}).eq('order_id',o.id).eq('kind','admin_order');return false;}
 }
 export async function complete(o:Order,allowCapture:boolean){
- if(o.status==='paid')return {order:o,emailSent:await notifyOrder(o)};
+ if(o.status==='paid'){const emailSent=await notifyOrder(o);const adminSent=await notifyAdmin(o);return {order:o,emailSent,adminSent};}
  if(o.status!=='awaiting_payment'||!o.paypal_order_id)throw new CheckoutError('This order has not been approved for payment.',409);
  let result=await paypal('/v2/checkout/orders/'+o.paypal_order_id,o.mode);
  if(result.status==='APPROVED'&&allowCapture){
@@ -39,5 +58,5 @@ export async function complete(o:Order,allowCapture:boolean){
  if(error)throw new CheckoutError('Payment is being reconciled. Please check again; do not place another order.',503);
  const {data:paid,error:readError}=await db().from('commerce_orders').select('*').eq('id',o.id).single();if(readError||!paid)throw new CheckoutError('Payment is saved. Please check the order again.',503);
  const paidOrder=paid as Order;
- return {order:paidOrder,emailSent:await notifyOrder(paidOrder)};
+ const emailSent=await notifyOrder(paidOrder);const adminSent=await notifyAdmin(paidOrder);return {order:paidOrder,emailSent,adminSent};
 }

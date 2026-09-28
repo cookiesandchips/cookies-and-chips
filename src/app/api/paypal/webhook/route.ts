@@ -16,7 +16,7 @@ export async function POST(request:Request){try{
  if(typeof id!=='string')throw new CheckoutError('Missing payment reference.');
  const {data,error}=await db().from('commerce_orders').select('*').eq('paypal_order_id',id).eq('mode',mode).single();
  if(error||!data)throw new CheckoutError('Order not found.',404);
- const result=await complete(data as Order,false);if(!result.emailSent)throw new CheckoutError('Email delivery pending retry.',503);
+ const result=await complete(data as Order,false);if(!result.emailSent||!result.adminSent)throw new CheckoutError('Email delivery pending retry.',503);
  }
  return Response.json({received:true});
  }catch(error){return failure(error);}}
