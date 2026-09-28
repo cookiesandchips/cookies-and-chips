@@ -8,7 +8,7 @@ export function AuthForm({signedIn=false,updatePassword=false}:{signedIn?:boolea
  async function submit(event:FormEvent<HTMLFormElement>){event.preventDefault();setBusy(true);setMessage('');
  const form=event.currentTarget;const data=new FormData(form);const email=String(data.get('email')||'').trim();const password=String(data.get('password')||'');
  try {const client=browserClient();const callback=window.location.origin+'/auth/callback';
- if(signedIn){const {error}=await client.auth.signOut();if(error)throw error;router.refresh();}
+ if(signedIn){const response=await fetch('/auth/sign-out',{method:'POST'});if(!response.ok)throw Error();router.refresh();}
  else if(updatePassword){const {error}=await client.auth.updateUser({password});if(error)throw error;form.reset();setMessage('Your password has been updated.');}
  else if(mode==='login'){const {error}=await client.auth.signInWithPassword({email,password});if(error){setMessage('Unable to sign in. Check your details and confirm your email, or reset your password.');return;}router.refresh();}
  else if(mode==='signup'){const {error}=await client.auth.signUp({email,password,options:{emailRedirectTo:callback}});if(error)throw error;form.reset();setMessage('Check your inbox for the next step. If you already have an account, sign in or reset your password.');}

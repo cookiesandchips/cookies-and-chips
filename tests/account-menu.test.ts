@@ -1,0 +1,5 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {accountNames,customerName,readAccountCookieValue} from '../src/lib/account-menu';
+test('the header uses the customer name and shortens it on a small screen',()=>{assert.deepEqual(accountNames('Brant Wadsworth','brant@email.com'),{full:'Brant Wadsworth',short:'Brant'});assert.deepEqual(accountNames('','brant@email.com'),{full:'brant@email.com',short:'brant'});assert.equal(customerName({user_metadata:{full_name:'Heather Herbet'}},'Other Name'),'Heather Herbet');assert.equal(customerName({user_metadata:{}},'Heather Herbet','Order Name'),'Heather Herbet');});
+test('the shop can read the same account cookie the header writes',()=>{const raw=encodeURIComponent(JSON.stringify({name:'Brant Wadsworth',email:'brant@email.com',isAdmin:true}));assert.deepEqual(readAccountCookieValue(raw),{name:'Brant Wadsworth',email:'brant@email.com',isAdmin:true});assert.equal(readAccountCookieValue(''),null);assert.equal(readAccountCookieValue('%7B%7D'),null);});
