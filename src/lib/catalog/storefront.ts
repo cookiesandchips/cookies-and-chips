@@ -1,0 +1,15 @@
+import {publicRecipe} from '@/lib/recipes/public';
+import {taxonomy,publicAssignments} from '@/lib/management/taxonomy';
+import {db} from '@/lib/checkout/server';
+import {publicSite} from '@/lib/management/auth';
+export async function publicCatalog(){
+ const [{data:products,error},site,{data:reviews}]=await Promise.all([db().from('commerce_products').select('id,title,price_cents,package_count,product_type,active,details'),publicSite(),db().from('commerce_reviews').select('id,display_name,rating,body').eq('status','approved').order('created_at',{ascending:false}).limit(20)]);
+ if(error)throw error;
+ const {data:recipes,error:recipeError}=await db().from('commerce_settings').select('key,value').like('key','recipe:%');
+ if(recipeError)throw recipeError;
+ const recipesById=new Map((recipes||[]).map(r=>[String(r.key.slice(7)),r.value]));
+ const terms=await taxonomy(products||[]);
+ const safeProducts=(products||[]).map(p=>(p.active?{...p,details:{...Object.fromEntries(['category','subcategory','collection','flavor','description','defaultImage','image','featured','freshness'].map(k=>[k,p.details[k]])),...publicAssignments(p.details,terms),...publicRecipe(recipesById.get(String(p.id)),p.details,site)}}:{id:p.id,active:false,details:{}}));
+ const safeSite=Object.fromEntries(['contactEmail','socials','monthlyProductId','storyIntro','storyBody','cancellationPolicy','allergenNotice','showNutrition','showAllergens','showFreshness'].map(k=>[k,site[k]]));
+ return {products:safeProducts,site:safeSite,reviews:reviews||[]};
+}
