@@ -10,6 +10,6 @@ export async function publicCatalog(){
  const recipesById=new Map((recipes||[]).map(r=>[String(r.key.slice(7)),r.value]));
  const terms=await taxonomy(products||[]);
  const safeProducts=(products||[]).map(p=>(p.active?{...p,details:{...Object.fromEntries(['category','subcategory','collection','flavor','description','defaultImage','image','featured','freshness'].map(k=>[k,p.details[k]])),...publicAssignments(p.details,terms),...publicRecipe(recipesById.get(String(p.id)),p.details,site)}}:{id:p.id,active:false,details:{}}));
- const safeSite=Object.fromEntries(['contactEmail','socials','monthlyProductId','storyIntro','storyBody','cancellationPolicy','allergenNotice','showNutrition','showAllergens','showFreshness'].map(k=>[k,site[k]]));
+ const safeSite=Object.fromEntries(['contactEmail','socials','monthlyProductId','storyIntro','storyBody','cancellationPolicy','allergenNotice','showNutrition','showAllergens','showFreshness','heroPrefix','heroAccent','heroEyebrow','storyGreeting','closingAccent','closingTitle'].map(k=>[k,site[k]]));
  return {products:safeProducts,site:safeSite,reviews:reviews||[]};
 }
