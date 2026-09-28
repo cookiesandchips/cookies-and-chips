@@ -57,5 +57,5 @@ export function validateReady(config:any,values:Record<string,string>){
    throw new CheckoutError(`${{taxjar:'TaxJar',shippo:'Shippo'}[provider]} ${config[modeKey[provider]]} credentials are incomplete. Add them here or disable this service before saving.`);
   }
  }
- if(config.paymentEnabled&&config.paymentMode==='live'&&((config.taxEnabled&&config.taxMode!=='live')||(config.shippingEnabled&&config.shippingMode!=='live')))throw new CheckoutError('Set enabled tax and shipping services to live before activating live payments.');
+ if(config.paymentEnabled&&config.paymentMode==='live'&&((config.taxEnabled&&config.taxMode!=='live')||(config.shippingEnabled&&config.shippingMode!=='live')))throw new CheckoutError('Production was not saved, so a refresh returns to sandbox. Set enabled tax and shipping services to Production / live, or turn them off, before activating live payments.');
 }

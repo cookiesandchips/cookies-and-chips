@@ -32,7 +32,7 @@ test('vault authenticates ciphertext and refuses a wrong or missing infrastructu
 test('activation requires matching complete credentials and live enabled companion services',()=>{
  const config={paymentEnabled:true,paymentMode:'live',shippingEnabled:true,shippingMode:'sandbox',taxEnabled:false,taxMode:'sandbox'};
  const values={paypalLiveId:'id',paypalLiveSecret:'secret',paypalLiveWebhook:'hook',shippoSandboxToken:'test'};
- assert.throws(()=>validateReady(config,values),/shipping services to live/);
+ assert.throws(()=>validateReady(config,values),/Production was not saved/);
  assert.throws(()=>validateReady({...config,shippingMode:'live'},values),/Shippo live credentials/);
  assert.doesNotThrow(()=>validateReady({...config,shippingMode:'live'},{...values,shippoLiveToken:'live'}));
  assert.throws(()=>validateReady({taxEnabled:true,taxMode:'live'},{}),/TaxJar/);
