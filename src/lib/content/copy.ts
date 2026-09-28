@@ -4,6 +4,7 @@ export const siteCopy={
  heroAccent:'better.',
  heroEyebrow:'Even if it’s only for a minute.',
  storyGreeting:'Hi, I’m Heather.',
+ storyCaption:'Our gold and pink accents honor Ali and represent cancer awareness—a reminder of the love at the heart of Cookies & Chips.',
  closingAccent:'Made with love,',
  closingTitle:'meant to be shared.',
 };
