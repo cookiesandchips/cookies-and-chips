@@ -3,6 +3,7 @@ import {db,type Order} from './server';
 import {paypal,captureEvidence} from './providers';
 import {CheckoutError,money} from './core';
 import {adminNotice,paidReceipt} from './receipt';
+import {ensureShippoOrder} from './shippo-fulfillment';
 const ADMIN_EMAIL='admin@cookiesandchips.com';
 export async function notifyOrder(o:Order){
  if(o.status!=='paid')return false;
@@ -43,7 +44,7 @@ export async function notifyAdmin(o:Order){
  }catch{await database.from('commerce_notifications').update({state:'failed',last_error:'Bakery notice requires retry.'}).eq('order_id',o.id).eq('kind','admin_order');return false;}
 }
 export async function complete(o:Order,allowCapture:boolean){
- if(o.status==='paid'){const emailSent=await notifyOrder(o);const adminSent=await notifyAdmin(o);return {order:o,emailSent,adminSent};}
+ if(o.status==='paid'){const emailSent=await notifyOrder(o);const adminSent=await notifyAdmin(o);const shippoSent=await ensureShippoOrder(o);return {order:o,emailSent,adminSent,shippoSent};}
  if(o.status!=='awaiting_payment'||!o.paypal_order_id)throw new CheckoutError('This order has not been approved for payment.',409);
  let result=await paypal('/v2/checkout/orders/'+o.paypal_order_id,o.mode);
  if(result.status==='APPROVED'&&allowCapture){
@@ -58,5 +59,5 @@ export async function complete(o:Order,allowCapture:boolean){
  if(error)throw new CheckoutError('Payment is being reconciled. Please check again; do not place another order.',503);
  const {data:paid,error:readError}=await db().from('commerce_orders').select('*').eq('id',o.id).single();if(readError||!paid)throw new CheckoutError('Payment is saved. Please check the order again.',503);
  const paidOrder=paid as Order;
- const emailSent=await notifyOrder(paidOrder);const adminSent=await notifyAdmin(paidOrder);return {order:paidOrder,emailSent,adminSent};
+ const emailSent=await notifyOrder(paidOrder);const adminSent=await notifyAdmin(paidOrder);const shippoSent=await ensureShippoOrder(paidOrder);return {order:paidOrder,emailSent,adminSent,shippoSent};
 }

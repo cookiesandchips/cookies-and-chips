@@ -6,6 +6,7 @@ import {admin,audit,publicSite} from '@/lib/management/auth';
 import {salePrice,productDetails,socials} from '@/lib/management/validation';
 import {CheckoutError,text,email} from '@/lib/checkout/core';
 import {notifyAdmin,notifyOrder} from '@/lib/checkout/complete';
+import {ensureShippoOrder} from '@/lib/checkout/shippo-fulfillment';
 import {randomUUID} from 'node:crypto';
 export async function GET(){try{await admin();const [{data:products,error},{data:orders},{data:reviews},{data:subscribers},{data:discounts},site]=await Promise.all([db().from('commerce_products').select('*').order('id'),db().from('commerce_orders').select('id,created_at,customer_name,email,status,mode,items,subtotal_cents,shipping_cents,tax_cents,total_cents,fulfillment'+(await supportSchemaReady()?',donation_cents':'')).order('created_at',{ascending:false}).limit(100),db().from('commerce_reviews').select('*').order('created_at',{ascending:false}).limit(100),db().from('commerce_newsletter').select('email,status,confirmed_at').order('requested_at',{ascending:false}).limit(500),db().from('commerce_discounts').select('*'),publicSite()]);if(error)throw error;const terms=await taxonomy(products||[]);return Response.json({taxonomy:terms,products:(products||[]).map(p=>({...p,details:{...p.details,...assignments(p.details,terms)}})),orders:orders||[],reviews:reviews||[],subscribers:subscribers||[],discounts:discounts||[],site},{headers:{'Cache-Control':'no-store'}});}catch(e){return failure(e);}}
 export async function POST(r:Request){try{sameOrigin(r);const user=await admin();
@@ -25,6 +26,6 @@ export async function POST(r:Request){try{sameOrigin(r);const user=await admin()
  }else if(input.action==='review'){
  if(!['approved','rejected'].includes(input.status))throw new CheckoutError('Choose approve or reject.');const {error}=await db().from('commerce_reviews').update({status:input.status}).eq('id',input.id);if(error)throw error;await audit(user.id,'review-'+input.status,input.id);
  }else if(input.action==='resend-order'){
- const {data,error}=await db().from('commerce_orders').select('*').eq('id',input.id).eq('status','paid').single();if(error)throw error;if(!await notifyOrder(data)||!await notifyAdmin(data))throw new CheckoutError('Delivery is pending or requires manual reconciliation.',503);await audit(user.id,'order-email-retry',input.id);
+ const {data,error}=await db().from('commerce_orders').select('*').eq('id',input.id).eq('status','paid').single();if(error)throw error;if(!await notifyOrder(data)||!await notifyAdmin(data)||!await ensureShippoOrder(data))throw new CheckoutError('Delivery is pending or requires manual reconciliation.',503);await audit(user.id,'order-email-retry',input.id);
  }else throw new CheckoutError('Unknown action.');
  return Response.json({saved:true});}catch(e){return failure(e);}}

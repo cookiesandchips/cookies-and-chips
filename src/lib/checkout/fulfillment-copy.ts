@@ -3,5 +3,5 @@ export function deliveryExpectations(value:unknown){return typeof value==='strin
 export function fulfillmentMessage(fulfillment:{method:string;expectations?:string}){
  if(fulfillment.method==='delivery')return fulfillment.expectations||'We will contact you to confirm your local delivery day and window.';
  if(fulfillment.method==='pickup')return 'Pickup is by appointment. We will contact you when your order is ready.';
- return 'We will send shipping details when your order is dispatched.';
+ return 'Track your order from payment through delivery.';
 }
