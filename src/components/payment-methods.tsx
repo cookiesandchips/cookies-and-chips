@@ -37,5 +37,5 @@ export default function PaymentMethods({order,config,onError,onBusy}:{order:any;
   setup().catch(e=>{if(!disposed)setLoading(false);fail((e as Error).message);});
   return()=>{disposed=true;for(const button of buttons)button.close().catch(()=>{});paypalHolder.current?.replaceChildren();venmoHolder.current?.replaceChildren();cardHolder.current?.replaceChildren();googleHolder.current?.replaceChildren();};
  },[order.id,order.mode,order.total_cents,config.paypalClientId,config.agreement.version]);
- return <div className="pay-methods" aria-label="Secure payment methods"><div className="pay-express"><h2>Express checkout</h2><div ref={paypalHolder}/><div ref={venmoHolder}/><div ref={googleHolder}/></div>{showCard&&<p className="pay-or"><span>or pay with a card</span></p>}<div ref={cardHolder}/>{loading&&<p role="status">Loading secure payment options…</p>}<p className="pay-note">Available payment options depend on your device and account.</p></div>;
+ return <div className="pay-methods" aria-label="Secure payment methods"><div className="pay-express"><h2>Express checkout</h2><div ref={paypalHolder}/><div ref={venmoHolder}/><div ref={googleHolder}/></div>{showCard&&<p className="pay-or"><span>or pay with a card</span></p>}<div ref={cardHolder}/>{loading&&<p role="status">Loading secure payment options…</p>}</div>;
 }
