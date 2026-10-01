@@ -2,6 +2,7 @@ import {normalizeState} from '../us-states';
 import {createHash} from 'node:crypto';
 import {CheckoutError} from './errors';
 export {CheckoutError} from './errors';
+export {personName} from './name';
 export type Address={name:string;street1:string;street2?:string;city:string;state:string;zip:string;country:'US';phone?:string};
 export type Product={id:string;title:string;price_cents:number;package_count:number;product_type:string;tax_code?:string;active:boolean};
 export type Line={id:string;title:string;quantity:number;unit_cents:number;package_count:number;product_type:string;tax_code?:string};

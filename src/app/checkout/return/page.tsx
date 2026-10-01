@@ -1,4 +1,5 @@
 'use client';
+import {personName} from '@/lib/checkout/name';
 import {fulfillmentMessage} from '@/lib/checkout/fulfillment-copy';
 import {packageName} from '@/lib/checkout/display';
 import {useEffect,useRef,useState} from 'react';
@@ -12,9 +13,9 @@ export default function PaymentReturn(){
  const a=result.fulfillment.address;
  const method=result.fulfillment.method;
  const placeLabel=method==='pickup'?'Pickup':method==='delivery'?'Local delivery':'Shipping';
- const first=String(result.customerName||'friend').trim().split(/\s+/)[0];
+ let first='';try{first=personName(result.customerName).split(/\s+/)[0];}catch{}
  const when=result.paidAt?new Intl.DateTimeFormat('en-US',{dateStyle:'long',timeZone:'America/Phoenix'}).format(new Date(result.paidAt)):'';
- return <section className="order-confirm" aria-live="polite"><header className="confirm-hero"><p className="confirm-mark" aria-hidden="true">✓</p><h1>Thank you, {first}!</h1><p>{result.mode==='sandbox'?'Sandbox test completed — no real charge or fulfillment.':method==='pickup'?'We’ve received your order and will get it ready soon.':'Your cookies are officially on the way.'}</p></header>
+ return <section className="order-confirm" aria-live="polite"><header className="confirm-hero"><p className="confirm-mark" aria-hidden="true">✓</p><h1>{first?`Thank you, ${first}!`:'Thank you!'}</h1><p>{result.mode==='sandbox'?'Sandbox test completed — no real charge or fulfillment.':method==='pickup'?'We’ve received your order and will get it ready soon.':'Your cookies are officially on the way.'}</p></header>
  <article className="confirm-card"><header className="confirm-order"><div><p className="receipt-kicker">Order</p><p className="receipt-order">#{result.id.slice(0,8)}</p></div>{when&&<p>{when}</p>}</header>
  <ul className="confirm-items">{result.items.map((l:any)=><li key={l.id}><img src={images[l.id]||'/brand/logo.png'} alt=""/><div><strong>{l.title}</strong><span>{packageName(l.quantity,l.package_count)}</span></div><span>{money(l.quantity*l.unit_cents)}</span></li>)}</ul>
  <dl className="receipt-totals"><div><dt>Subtotal</dt><dd>{money(result.subtotal_cents)}</dd></div>{!!result.donation_cents&&<div><dt>CureSearch donation</dt><dd>{money(result.donation_cents)}</dd></div>}<div><dt>{placeLabel}</dt><dd>{method==='pickup'||result.shipping_cents===0?'Free':money(result.shipping_cents)}</dd></div><div><dt>Tax</dt><dd>{money(result.tax_cents)}</dd></div><div className="receipt-total"><dt>Total</dt><dd>{money(result.total_cents)}</dd></div></dl>

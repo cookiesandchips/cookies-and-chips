@@ -1,6 +1,7 @@
 'use client';
 import PaymentMethods from '@/components/payment-methods';
 import StateSelect from '@/components/state-select';
+import {personName} from '@/lib/checkout/name';
 import {packageName} from '@/lib/checkout/display';
 import {useEffect,useRef,useState} from 'react';
 const amount=(n:number)=>'$'+(n/100).toFixed(2);
@@ -30,7 +31,7 @@ export default function Checkout({initialConfig=null,initialBag={},initialAccoun
  const method=order?.fulfillment?.method||(details.method==='pickup'?'pickup':'shipping');
  const shipLabel=method==='delivery'?'Local delivery':method==='pickup'?'Pickup':'Shipping';
  const addressReady=details.street1.trim().length>=3&&details.city.trim().length>0&&/^[A-Z]{2}$/.test(details.state)&&zipReady(details.zip);
- const identityReady=emailReady(details.email)&&details.name.trim().length>0;
+ const identityReady=emailReady(details.email)&&(()=>{try{return !!personName(details.name);}catch{return false;}})();
  const canShip=!!(config?.deliveryEnabled||config?.shippingEnabled);
  const canPickup=!!config?.pickupEnabled;
  const signature=[details.email,details.name,details.method,details.street1,details.city,details.state,details.zip,details.donation,appliedCode,rateToken,items.map(l=>l.id+':'+l.quantity).join(),account===undefined?'loading':'ready'].join('|');
