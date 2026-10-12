@@ -5,7 +5,7 @@ import {pricedPackage} from './offers';
 export {CheckoutError} from './errors';
 export {personName} from './name';
 export type Address={name:string;street1:string;street2?:string;city:string;state:string;zip:string;country:'US';phone?:string};
-export type Product={id:string;title:string;price_cents:number;package_count:number;product_type:string;tax_code?:string;active:boolean};
+export type Product={id:string;title:string;price_cents:number;package_count:number;product_type:string;tax_code?:string;active:boolean;details?:{halfDozenCents?:unknown;packageLabel?:unknown}|null};
 export type Line={id:string;title:string;quantity:number;unit_cents:number;package_count:number;product_type:string;tax_code?:string};
 export const money=(cents:number)=>(cents/100).toFixed(2);
 export function cents(value:unknown){const s=String(value);if(!/^\d+(\.\d{1,2})?$/.test(s))throw new CheckoutError('Invalid provider amount.',502);const [whole,fraction='']=s.split('.');const amount=Number(whole)*100+Number(fraction.padEnd(2,'0'));if(!Number.isSafeInteger(amount))throw new CheckoutError('Invalid provider amount.',502);return amount;}
